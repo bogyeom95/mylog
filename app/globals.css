@@ -8,51 +8,57 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-[data-rehype-pretty-code-figure] pre {
+pre [data-line] {
+  padding: 0 0.5rem;
+}
+code[data-line-numbers] {
+  counter-reset: line;
 }
 
-[data-rehype-pretty-code-figure] [data-line] {
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  display: inline-block;
+  width: 1rem; /* 번호가 오른쪽에 더 정렬되도록 너비 조정 */
+  margin-right: 1.5rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid rgba(193, 193, 193, 0.5); /* 투명한 구분선 */
+  text-align: right;
+
+  font-size: 0.9em; /* 조금 작은 글씨 */
+
+  opacity: 0.8; /* 약간의 투명도 추가 */
 }
 
-[data-rehype-pretty-code-figure] pre {
+/* 코드 블록 전체 래퍼 스타일 */
+[data-rehype-pretty-code-figure] {
+  background-color: #171717;
+  color: #bebebe;
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  border-radius: 6px;
+
+  margin: 16px 0;
+  border: 1px solid #c1c1c1; /* 전체 코드 블록에 테두리 추가 */
 }
 
+/* 코드 블록 제목 스타일 */
 [data-rehype-pretty-code-title] {
+  background-color: #171717;
+  color: #bebebe;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #c1c1c1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
-[data-rehype-pretty-code-title] + pre {
-}
-
-.dark [data-rehype-pretty-code-title] {
-  /* 다크모드 설정 관련 */
-}
-
-[data-rehype-pretty-code-figure] code {
-}
-
-[data-rehype-pretty-code-figure] [data-line]::before {
-}
-
-[data-line-numbers] > [data-line]::before {
-}
-
-[data-line-numbers-max-digits="2"] > [data-line]::before {
-}
-
-[data-line-numbers-max-digits="3"] > [data-line]::before {
-}
-
-[data-highlighted-line] {
-}
-
-[data-highlighted-line-id="minus"] {
-}
-
-[data-highlighted-line-id="minus"]::before {
-}
-
-[data-highlighted-line-id="plus"] {
-}
-
-[data-highlighted-line-id="plus"]::before {
+[data-line-numbers] {
+  background-color: #232323;
+  color: #bebebe;
+  padding: 0.25rem 0.5rem;
 }

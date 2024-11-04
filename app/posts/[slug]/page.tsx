@@ -2,7 +2,7 @@ import { allPosts, Post } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MDXReader from "components/MDXReader";
+import MDXReader from "@/components/mdx-reader";
 
 export default async function PostPage({
   params,

@@ -24,11 +24,7 @@ export const Post = defineDocumentType(() => ({
 }));
 
 const rehypeOptions = {
-  theme: {
-    dark: "github-dark-dimmed",
-    light: "github-light",
-  },
-  keepBackground: true,
+  theme: "github-dark",
 };
 
 export default makeSource({
