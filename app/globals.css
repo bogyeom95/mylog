@@ -4,24 +4,55 @@
 
 @import "material-icons/iconfont/material-icons.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-code.hljs {
-  @apply !whitespace-pre;
+[data-rehype-pretty-code-figure] pre {
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+}
+
+[data-rehype-pretty-code-figure] pre {
+}
+
+[data-rehype-pretty-code-title] {
+}
+
+[data-rehype-pretty-code-title] + pre {
+}
+
+.dark [data-rehype-pretty-code-title] {
+  /* 다크모드 설정 관련 */
+}
+
+[data-rehype-pretty-code-figure] code {
+}
+
+[data-rehype-pretty-code-figure] [data-line]::before {
+}
+
+[data-line-numbers] > [data-line]::before {
+}
+
+[data-line-numbers-max-digits="2"] > [data-line]::before {
+}
+
+[data-line-numbers-max-digits="3"] > [data-line]::before {
+}
+
+[data-highlighted-line] {
+}
+
+[data-highlighted-line-id="minus"] {
+}
+
+[data-highlighted-line-id="minus"]::before {
+}
+
+[data-highlighted-line-id="plus"] {
+}
+
+[data-highlighted-line-id="plus"]::before {
 }
