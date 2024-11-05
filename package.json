@@ -20,7 +20,8 @@
     "rehype": "^13.0.2",
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
-    "shiki": "^1.22.2"
+    "shiki": "^1.22.2",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

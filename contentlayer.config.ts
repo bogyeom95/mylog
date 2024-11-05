@@ -2,6 +2,8 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import { Pluggable } from "unified";
 import remarkGfm from "remark-gfm";
+import { visit } from "unist-util-visit";
+
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `**/*.mdx`,
@@ -36,6 +38,38 @@ export default makeSource({
 
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, rehypeOptions] as Pluggable],
+    rehypePlugins: [
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === "element" && node?.tagName === "pre") {
+            const [child] = node.children;
+
+            if (child.tagName !== "code") return;
+
+            console.log("code child", child);
+
+            node.__raw__ = child.children?.[0].value;
+          }
+        });
+      },
+      [rehypePrettyCode, rehypeOptions] as Pluggable,
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === "element" && node?.tagName === "figure") {
+            if (!("data-rehype-pretty-code-figure" in node.properties)) {
+              return;
+            }
+            // console.log(node);
+            const figcaptionElement = node.children[0];
+            if (figcaptionElement.tagName !== "figcaption") {
+              return;
+            }
+            // console.log("figcaption", figcaptionElement);
+            figcaptionElement.properties["__raw__"] = node.__raw__;
+            // console.log("figcaption", figcaptionElement);
+          }
+        });
+      },
+    ],
   },
 });
