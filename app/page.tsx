@@ -4,6 +4,9 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 
 export default async function Home() {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
   return (
     <div className="flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto max-w-4xl">
       {allPosts.map((post) => (

@@ -9,6 +9,9 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
   const { slug } = await params;
 
   if (!slug) {
