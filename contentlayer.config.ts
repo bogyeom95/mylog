@@ -1,8 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import { Pluggable } from "unified";
-
+import remarkGfm from "remark-gfm";
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `**/*.mdx`,
@@ -24,7 +23,11 @@ export const Post = defineDocumentType(() => ({
 }));
 
 const rehypeOptions = {
-  theme: "github-dark",
+  theme: {
+    dark: "github-dark-dimmed",
+    light: "github-light",
+  },
+  keepBackground: true,
 };
 
 export default makeSource({

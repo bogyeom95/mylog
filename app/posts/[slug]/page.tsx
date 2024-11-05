@@ -16,7 +16,9 @@ export default async function PostPage({
     return notFound();
   }
 
-  const post: Post | undefined = allPosts.find((post) => post.title === slug);
+  const post: Post | undefined = allPosts.find(
+    (post) => post._raw.flattenedPath === slug
+  );
 
   if (!post) {
     console.error(`Error: No post found with title ${slug}`);
@@ -40,6 +42,7 @@ export default async function PostPage({
         {/* 한국 날짜 포맷 */}
         {format(parseISO(post.date), "yyyy-MM-dd")}
       </time>
+
       <MDXReader post={post} />
     </div>
   );

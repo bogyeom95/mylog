@@ -11,7 +11,7 @@ export default async function Home() {
           key={post.title}
           className="flex w-full flex-col transition duration-200 ease-in-out hover:shadow-lg hover:scale-[1.02]"
         >
-          <Link href={`posts/` + post.title} className="contents">
+          <Link href={`posts/` + post._raw.flattenedPath} className="contents">
             <div className="flex flex-col gap-4 border border-base-300 bg-base-100 rounded-lg p-4">
               <div
                 className={`flex ${post.image ? "flex-row" : "flex-col"} gap-4`}
