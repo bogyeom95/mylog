@@ -41,7 +41,7 @@ code[data-line-numbers] > [data-line]::before {
 
 /* 코드 블록 제목 스타일 */
 [data-rehype-pretty-code-title] {
-  @apply font-semibold text-base px-4 py-2 bg-gray-100 border-b border-gray-300 rounded-t-lg text-gray-800;
+  @apply font-semibold text-base px-4 py-2 bg-gray-100 dark:bg-gray-700 border-b border-gray-300 rounded-t-lg text-gray-800 dark:text-gray-200;
 }
 
 [data-line-numbers] {

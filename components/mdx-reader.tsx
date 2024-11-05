@@ -1,6 +1,5 @@
 "use client";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import Image from "next/image";
 import { Figcaption } from "./items/figcaption";
 
 interface MDXReaderProps {
@@ -14,7 +13,6 @@ interface MDXReaderProps {
 export default function MDXReader({ post }: MDXReaderProps) {
   const MDXContent = useMDXComponent(post.body.code);
   const components = {
-    Image,
     figcaption: Figcaption,
     h1: (props) => <h1 className="text-4xl font-bold" {...props} />,
     h2: (props) => <h2 className="text-3xl font-bold" {...props} />,

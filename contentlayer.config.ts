@@ -48,6 +48,15 @@ export default makeSource({
 
             console.log("code child", child);
 
+            // 언어 정보를 추출하여 `data-language` 속성으로 설정
+            node.properties = {
+              ...node.properties,
+              language: child.properties.className?.[0].replace(
+                "language-",
+                ""
+              ),
+            };
+
             node.__raw__ = child.children?.[0].value;
           }
         });

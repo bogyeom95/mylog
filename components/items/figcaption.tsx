@@ -7,13 +7,13 @@ type Props = {
 };
 
 export const Figcaption = ({ children, __raw__, ...props }: Props) => {
+  console.log("figcaption", children, props);
   return (
     <figcaption {...props}>
       <div className={"flex justify-between items-center"}>
         {children}
-        <div>
-          <CopyCodeBtn text={__raw__} />
-        </div>
+
+        <CopyCodeBtn text={__raw__} />
       </div>
     </figcaption>
   );
