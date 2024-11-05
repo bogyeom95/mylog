@@ -36,7 +36,7 @@ code[data-line-numbers] > [data-line]::before {
 
 /* 코드 블록 전체 래퍼 스타일 */
 [data-rehype-pretty-code-figure] {
-  @apply font-mono text-sm leading-6 overflow-x-auto rounded-lg my-4 border border-gray-300;
+  @apply font-mono text-sm leading-6 overflow-x-auto rounded-lg  border border-gray-300;
 }
 
 /* 코드 블록 제목 스타일 */
