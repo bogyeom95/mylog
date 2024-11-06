@@ -7,7 +7,7 @@ import MDXReader from "@/components/mdx-reader";
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
 

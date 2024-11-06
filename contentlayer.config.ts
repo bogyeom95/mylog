@@ -90,9 +90,9 @@ export default makeSource({
       () => (tree) => {
         // figure 태그의 연속 요소를 하나로 묶는 작업
         const newChildren = [];
-        let buffer = [];
+        let buffer = [] as any[];
 
-        tree.children.forEach((node) => {
+        tree.children.forEach((node: any) => {
           if (node.type === "element" && node.tagName === "figure") {
             buffer.push(node); // 연속된 figure 요소를 buffer에 추가
           } else if (node.type === "text" && node.value === "\n") {

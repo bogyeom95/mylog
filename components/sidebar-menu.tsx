@@ -53,19 +53,19 @@ function renderCategoryTree(
   depth = 1,
   currentPath: string
 ): JSX.Element {
-  let containsActiveLink = false; // 하위 항목에 활성화된 링크가 있는지 확인하는 플래그
+  // let containsActiveLink = false; // 하위 항목에 활성화된 링크가 있는지 확인하는 플래그
 
   const categoryElements = Object.entries(node)
     .sort(([, a], [, b]) => a.order - b.order)
     .map(([key, { name, posts = [], children }]) => {
       let isOpen = depth < 2; // 기본 상태는 첫 번째 레벨만 펼쳐짐
-      let hasActiveChild = false; // 하위 요소 중 활성화된 요소가 있는지 여부
+      // let hasActiveChild = false; // 하위 요소 중 활성화된 요소가 있는지 여부
 
       // 포스트 리스트 생성
       const postElements = posts.map((post) => {
         const isActive = currentPath === `/posts/${post._raw.flattenedPath}`;
         if (isActive) {
-          containsActiveLink = true;
+          // containsActiveLink = true;
           isOpen = true; // 현재 경로와 일치하는 경우 해당 depth를 펼침
         }
         return (
@@ -92,7 +92,7 @@ function renderCategoryTree(
       );
       if (childElements && childElements.props.containsActiveLink) {
         isOpen = true; // 하위 트리에 활성 링크가 있는 경우 펼쳐짐
-        containsActiveLink = true;
+        // containsActiveLink = true;
       }
 
       return (

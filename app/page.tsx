@@ -1,11 +1,12 @@
 import { getPostsBy } from "./actions";
 import PostList from "@/components/post/post-list";
 
-type SearchParams = { [key: string]: string | string[] | undefined };
-
-export default async function Home(props: { searchParams: SearchParams }) {
-  const searchParmas = await props.searchParams;
-  const q = searchParmas.q;
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const q = (await searchParams).q;
 
   const searchQuery = decodeURIComponent(String(q || ""));
 

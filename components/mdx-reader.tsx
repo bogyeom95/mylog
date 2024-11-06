@@ -3,7 +3,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { Figcaption } from "./items/figcaption";
 import Pre from "./items/pre";
 import CodeBlockContainer from "./items/code-block-container";
-import { ReactNode } from "react";
+import { HTMLAttributes } from "react";
 import { MDXComponents } from "mdx/types";
 interface MDXReaderProps {
   post: {
@@ -22,10 +22,11 @@ export default function MDXReader({ post }: MDXReaderProps) {
     div: ({
       children,
       ...props
-    }: {
-      children: ReactNode[];
-      className?: string;
-    }) => {
+    }: React.PropsWithChildren<
+      {
+        className?: string;
+      } & HTMLAttributes<HTMLDivElement>
+    >) => {
       if (props.className === "code-block-container") {
         return <CodeBlockContainer {...props}>{children}</CodeBlockContainer>;
       }

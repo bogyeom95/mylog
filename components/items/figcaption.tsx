@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
+import { HTMLAttributes } from "react";
 import CopyCodeBtn from "./copy-code-btn";
 
-type Props = {
-  children: ReactNode;
+type Props = HTMLAttributes<HTMLElement> & {
   __raw__?: string;
   language?: string;
 };
@@ -12,7 +11,7 @@ export const Figcaption = ({
   __raw__,
   language,
   ...props
-}: Props) => {
+}: React.PropsWithChildren<Props>) => {
   return (
     <figcaption {...props}>
       <div className={"flex justify-between items-center"}>
