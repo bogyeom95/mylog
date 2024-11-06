@@ -22,23 +22,31 @@ export default async function Home(props: {
   return (
     <div className="flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
       {filteredPosts.map((post) => (
-        <div
+        <Link
           key={post.title}
-          className="flex w-full flex-col transition duration-200 ease-in-out hover:shadow-2xl"
+          href={`posts/` + post._raw.flattenedPath}
+          className="contents"
         >
-          <Link href={`posts/` + post._raw.flattenedPath} className="contents">
-            <div className="flex flex-col gap-4 border border-base-300 bg-base-100 rounded-lg p-4 ">
+          <div key={post.title} className="flex w-full flex-col">
+            <div className="ring-2 ring-base-300  rounded-sm p-4 hover:ring-4  transition duration-200 ease-in-out hover:shadow-2xl">
               <div className="flex flex-row gap-4">
-                {post.image && (
-                  <div className="relative h-28 w-28 rounded-md flex-shrink-0 ">
+                <div className="relative h-28 w-28 rounded-md flex-shrink-0 ">
+                  {post.image ? (
                     <Image
                       src={post.image}
                       alt={post.title}
                       fill
                       objectFit="cover"
                     />
-                  </div>
-                )}
+                  ) : (
+                    <Image
+                      src={"image_search_28dp.svg"}
+                      fill
+                      alt="Empty Image"
+                      objectFit="cover"
+                    />
+                  )}
+                </div>
                 <div className={`flex flex-col gap-2 overflow-hidden`}>
                   <h1 className="text-2xl font-extrabold  truncate">
                     {post.title}
@@ -46,10 +54,12 @@ export default async function Home(props: {
                   <p className="pt-2 line-clamp-3">{post.description}</p>
                 </div>
               </div>
-              <CardBodyFooter post={post} />
+              <div className="mt-4">
+                <CardBodyFooter post={post} />
+              </div>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       ))}
     </div>
   );

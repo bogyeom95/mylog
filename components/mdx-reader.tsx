@@ -4,7 +4,7 @@ import { Figcaption } from "./items/figcaption";
 import Pre from "./items/pre";
 import CodeBlockContainer from "./items/code-block-container";
 import { ReactNode } from "react";
-
+import { MDXComponents } from "mdx/types";
 interface MDXReaderProps {
   post: {
     body: {
@@ -15,17 +15,10 @@ interface MDXReaderProps {
 
 export default function MDXReader({ post }: MDXReaderProps) {
   const MDXContent = useMDXComponent(post.body.code);
-  const components = {
+  const components: MDXComponents = {
     figcaption: Figcaption,
     pre: Pre,
-    text: ({ children }: { children: ReactNode }) => {
-      console.log(children);
-      if (typeof children === "string" && children === "\n") {
-        // 개행 문자인 경우 <br />로 렌더링
-        return <br />;
-      }
-      return <>{children}</>; // 일반 텍스트는 그대로 출력
-    },
+
     div: ({
       children,
       ...props

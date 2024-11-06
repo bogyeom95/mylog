@@ -3,8 +3,8 @@ import CopyCodeBtn from "./copy-code-btn";
 
 type Props = {
   children: ReactNode;
-  __raw__: string;
-  language: string;
+  __raw__?: string;
+  language?: string;
 };
 
 export const Figcaption = ({
