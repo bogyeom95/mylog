@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import { Pluggable } from "unified";
@@ -87,12 +88,13 @@ export default makeSource({
           }
         });
       },
-      () => (tree) => {
-        // figure 태그의 연속 요소를 하나로 묶는 작업
-        const newChildren = [];
-        let buffer = [] as any[];
 
-        tree.children.forEach((node: any) => {
+      () => (tree) => {
+        const newChildren: any[] = [];
+        let buffer: any[] = [];
+
+        // @ts-expect-error: tree의 타입을 알 수 없어서 any 처리
+        tree.children.forEach((node) => {
           if (node.type === "element" && node.tagName === "figure") {
             buffer.push(node); // 연속된 figure 요소를 buffer에 추가
           } else if (node.type === "text" && node.value === "\n") {
@@ -105,8 +107,6 @@ export default makeSource({
             }
           } else {
             if (buffer.length > 0) {
-              // buffer에 저장된 연속된 figure 요소들을 하나의 code-block-container로 묶기
-
               newChildren.push({
                 type: "element",
                 tagName: "div",

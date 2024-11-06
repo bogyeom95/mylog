@@ -61,9 +61,12 @@ export default function PostList({
           <span className="loading loading-dots loading-md "></span>
         </span>
       ) : (
-        <div role="alert" className="alert">
+        <h1 className="text-2xl font-semibold flex items-center gap-1">
+          <span className="material-icons-round text-4xl">
+            sentiment_very_dissatisfied
+          </span>
           <span>No More Post...</span>
-        </div>
+        </h1>
       )}
     </>
   );
@@ -77,7 +80,7 @@ function PostCard({ post }: { post: Post }) {
       className="contents"
     >
       <div key={post.title} className="flex w-full flex-col">
-        <div className="ring-2 ring-base-300  rounded-sm p-4 hover:ring-4  transition duration-200 ease-in-out ">
+        <div className="border-b-2 p-4  transition duration-200 ease-in-out hover:scale-105 ">
           <div className="flex flex-row gap-4">
             <div className="relative h-28 w-28 rounded-md flex-shrink-0 ">
               {post.image ? (
@@ -112,14 +115,14 @@ function PostCard({ post }: { post: Post }) {
   );
 }
 
-function CardBodyFooter({ post }: { post: Post }) {
+export function CardBodyFooter({ post }: { post: Post }) {
   return (
     <div className="flex items-center justify-between ">
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap *:mr-2">
         {post.tags?.map((tag) => (
           <span
             key={tag}
-            className="p-1 px-2 mx-1 text-sm font-medium  text-accent-content border bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-200 dark:border-neutral-800  transition duration-200"
+            className="p-1 px-2 text-sm font-medium  text-accent-content border bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-200 dark:border-neutral-800  transition duration-200"
           >
             {`${tag}`}
           </span>

@@ -1,6 +1,6 @@
 export default function loading() {
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-4">
+    <div className="lex flex-col  justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
       {/* Title skeleton */}
       <div className="skeleton h-8 w-3/4 mb-4" />
 
