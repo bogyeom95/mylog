@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Header() {
@@ -18,9 +19,13 @@ export default async function Header() {
       <nav className="navbar w-full">
         <div className="flex w-full items-center justify-between">
           <div className="flex justify-center items-center">
-            <h2 className="flex gap-1 items-center ml-2 sm:ml-4">
-              <span className="font-semibold text-2xl sm:text-4xl">MyLog</span>
-            </h2>
+            <Link href="/" className="flex items-center">
+              <h2 className="flex items-center ml-2 sm:ml-4">
+                <span className="font-semibold text-2xl sm:text-4xl">
+                  <span>MyLog</span>
+                </span>
+              </h2>
+            </Link>
             <form
               className="searchbox relative mx-8 w-full"
               action={handleSubmit}

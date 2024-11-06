@@ -19,7 +19,7 @@ export const Figcaption = ({
         {children}
         <div className="flex items-center">
           <span className="language-tag">{language}</span>
-          <CopyCodeBtn text={__raw__} />
+          <CopyCodeBtn text={__raw__ || ""} />
         </div>
       </div>
     </figcaption>

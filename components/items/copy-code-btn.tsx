@@ -7,6 +7,7 @@ export default function CopyCodeBtn({ text }: { text: string }) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
+
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // 2초 후 피드백 메시지 숨기기
     } catch (error) {

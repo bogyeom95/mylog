@@ -34,7 +34,7 @@ export default function RootLayout({
 
           {/* 메인 콘텐츠 영역 */}
           <main className="">{children}</main>
-          <aside className="hidden xl:flex mb-8 lg:w-1/5 sticky top-0 h-screen py-4 overflow-y-auto ">
+          <aside className="hidden xl:flex mb-8 lg:w-1/5 sticky top-0 h-screen mt-8 overflow-y-auto  ">
             <SidebarMenu />
           </aside>
         </div>
