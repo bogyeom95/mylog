@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import React from "react";
 import SidebarMenu from "@/components/sidebar-menu";
+import Footer from "@/components/footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -27,18 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable}`}>
+      <body className={`${roboto.variable} min-h-screen`}>
         <Header />
         <div className="flex justify-center ">
           {/* 사이드바 - lg 이상일 때만 보이도록 설정 */}
 
           {/* 메인 콘텐츠 영역 */}
-          <main className="">{children}</main>
+          <main className="min-h-screen">{children}</main>
 
           <aside className="hidden xl:flex  xl:w-1/5 sticky top-16 h-[calc(100vh-4rem)]  overflow-y-auto overflow-x-hidden z-10">
             <SidebarMenu />
           </aside>
         </div>
+        <Footer />
       </body>
     </html>
   );
