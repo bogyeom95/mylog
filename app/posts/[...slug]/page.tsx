@@ -11,7 +11,6 @@ export default async function PostPage({
 }) {
   const { slug } = await params;
 
-  console.log(slug);
   if (!slug) {
     return notFound();
   }
@@ -19,7 +18,6 @@ export default async function PostPage({
   const flattenedPath = slug.join("/");
 
   const post: Post | undefined = allPosts.find((post) => {
-    console.log(post._raw);
     return post._raw.flattenedPath === flattenedPath;
   });
 
@@ -35,18 +33,20 @@ export default async function PostPage({
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Link href="/" className="text-blue-500 hover:underline">
-        ← Back to all posts
-      </Link>
-      <h1 className="text-3xl font-bold  my-4">{post.title}</h1>
-      <p>{post.description}</p>
-      <time dateTime={post.date} className="text-sm">
-        {/* 한국 날짜 포맷 */}
-        {format(parseISO(post.date), "yyyy-MM-dd")}
-      </time>
+    <div className="flex flex-row  justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
+      <div className="w-full mx-auto p-4">
+        <Link href="/" className="text-blue-500 hover:underline">
+          ← Back to all posts
+        </Link>
+        <h1 className="text-3xl font-bold  my-4">{post.title}</h1>
+        <p>{post.description}</p>
+        <time dateTime={post.date} className="text-sm">
+          {/* 한국 날짜 포맷 */}
+          {format(parseISO(post.date), "yyyy-MM-dd")}
+        </time>
 
-      <MDXReader post={post} />
+        <MDXReader post={post} />
+      </div>
     </div>
   );
 }

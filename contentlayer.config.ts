@@ -106,11 +106,17 @@ export default makeSource({
           } else {
             if (buffer.length > 0) {
               // buffer에 저장된 연속된 figure 요소들을 하나의 code-block-container로 묶기
+
               newChildren.push({
                 type: "element",
                 tagName: "div",
                 properties: { className: ["code-block-container"] },
                 children: buffer,
+              });
+              newChildren.push({
+                type: "element",
+                tagName: "br", // <br /> 태그 생성
+                children: [], // <br /> 태그는 자식이 필요 없으므로 빈 배열
               });
               buffer = []; // buffer 초기화
             }
@@ -122,9 +128,19 @@ export default makeSource({
         if (buffer.length > 0) {
           newChildren.push({
             type: "element",
+            tagName: "br", // <br /> 태그 생성
+            children: [], // <br /> 태그는 자식이 필요 없으므로 빈 배열
+          });
+          newChildren.push({
+            type: "element",
             tagName: "div",
             properties: { className: ["code-block-container"] },
             children: buffer,
+          });
+          newChildren.push({
+            type: "element",
+            tagName: "br", // <br /> 태그 생성
+            children: [], // <br /> 태그는 자식이 필요 없으므로 빈 배열
           });
         }
 

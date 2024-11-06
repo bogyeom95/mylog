@@ -29,12 +29,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable}`}>
         <Header />
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           {/* 사이드바 - lg 이상일 때만 보이도록 설정 */}
 
           {/* 메인 콘텐츠 영역 */}
           <main className="">{children}</main>
-          <aside className="hidden xl:flex mb-8 lg:w-1/5 sticky top-0 h-screen mt-8 overflow-y-auto  ">
+
+          <aside className="hidden xl:flex  xl:w-1/5 sticky top-16 h-[calc(100vh-4rem)]  overflow-y-auto overflow-x-hidden z-10">
             <SidebarMenu />
           </aside>
         </div>

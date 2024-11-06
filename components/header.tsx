@@ -18,31 +18,25 @@ export default async function Header() {
     >
       <nav className="navbar w-full">
         <div className="flex w-full items-center justify-between">
-          <div className="flex justify-center items-center">
-            <Link href="/" className="flex items-center">
-              <h2 className="flex items-center ml-2 sm:ml-4">
-                <span className="font-semibold text-2xl sm:text-4xl">
-                  <span>MyLog</span>
-                </span>
-              </h2>
-            </Link>
-            <form
-              className="searchbox relative mx-8 w-full"
-              action={handleSubmit}
-            >
-              <label className="input input-bordered flex items-center gap-2">
-                <span className="material-icons-round text-gray-500">
-                  search
-                </span>
-                <input
-                  type="text"
-                  name="searchQuery"
-                  className="grow"
-                  placeholder="Search"
-                />
-              </label>
-            </form>
-          </div>
+          <Link href="/" className="flex items-center">
+            <h2 className="flex items-center ml-2 sm:ml-4">
+              <span className="font-semibold text-2xl sm:text-4xl">
+                <span>MyLog</span>
+              </span>
+            </h2>
+          </Link>
+
+          <form className="searchbox  relative mx-8" action={handleSubmit}>
+            <label className="input input-bordered flex items-center gap-2">
+              <span className="material-icons-round text-gray-500">search</span>
+              <input
+                type="text"
+                name="searchQuery"
+                className="grow"
+                placeholder="Search"
+              />
+            </label>
+          </form>
         </div>
       </nav>
     </div>

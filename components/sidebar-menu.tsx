@@ -72,7 +72,7 @@ function renderCategoryTree(
           <li key={post._id} className="">
             <Link href={`/posts/${post._raw.flattenedPath}`}>
               <span
-                className={`${isActive ? "text-blue-500 " : ""}  block w-[150px] truncate`}
+                className={`${isActive ? "text-blue-500 " : ""}  block  truncate`}
               >
                 {post.title}
               </span>
@@ -127,7 +127,7 @@ export default function SidebarMenu(): JSX.Element {
   const categoryHierarchy = buildCategoryHierarchy(allPosts);
 
   return (
-    <div className="menu px-4 pb-8 min-w-[100px]">
+    <div className="menu min-w-[100px]">
       {renderCategoryTree(categoryHierarchy, 1, currentPath)}
     </div>
   );
