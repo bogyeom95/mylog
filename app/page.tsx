@@ -3,13 +3,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 
-export default async function Home() {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 3000);
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+export default async function Home(props: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
+  const searchParmas = await props.searchParams;
+  const q = searchParmas.q;
+
+  const searchQuery = decodeURIComponent(String(q || ""));
+
+  const filteredPosts = allPosts.filter((post) => {
+    if (!searchQuery) return true;
+    return post.title.toLowerCase().includes(searchQuery.toLowerCase());
   });
+
   return (
     <div className="flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
-      {allPosts.map((post) => (
+      {filteredPosts.map((post) => (
         <div
           key={post.title}
           className="flex w-full flex-col transition duration-200 ease-in-out hover:shadow-2xl"

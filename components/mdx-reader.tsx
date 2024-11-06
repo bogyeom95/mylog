@@ -30,7 +30,7 @@ export default function MDXReader({ post }: MDXReaderProps) {
       children,
       ...props
     }: {
-      children: ReactNode;
+      children: ReactNode[];
       className?: string;
     }) => {
       if (props.className === "code-block-container") {

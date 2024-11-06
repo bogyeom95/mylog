@@ -6,7 +6,7 @@ export default async function Header() {
     const query = formData.get("searchQuery");
 
     if (query) {
-      redirect(`/?q=${encodeURIComponent(query)}`); // 검색어로 페이지 이동
+      redirect(`/?q=${encodeURIComponent(String(query))}`); // 검색어로 페이지 이동
     }
   };
 
@@ -35,8 +35,6 @@ export default async function Header() {
                   className="grow"
                   placeholder="Search"
                 />
-                <kbd className="kbd kbd-sm">⌘</kbd>
-                <kbd className="kbd kbd-sm">K</kbd>
               </label>
             </form>
           </div>
