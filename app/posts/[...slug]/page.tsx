@@ -7,21 +7,21 @@ import MDXReader from "@/components/mdx-reader";
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string[] };
 }) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 3000);
-  });
   const { slug } = await params;
 
+  console.log(slug);
   if (!slug) {
-    notFound();
     return notFound();
   }
 
-  const post: Post | undefined = allPosts.find(
-    (post) => post._raw.flattenedPath === slug
-  );
+  const flattenedPath = slug.join("/");
+
+  const post: Post | undefined = allPosts.find((post) => {
+    console.log(post._raw);
+    return post._raw.flattenedPath === flattenedPath;
+  });
 
   if (!post) {
     console.error(`Error: No post found with title ${slug}`);

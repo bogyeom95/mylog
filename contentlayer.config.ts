@@ -130,7 +130,6 @@ export default makeSource({
 
         // 최종적으로 tree.children에 newChildren 배열을 할당하여 적용
         tree.children = newChildren;
-        console.log(tree);
       },
     ],
   },
