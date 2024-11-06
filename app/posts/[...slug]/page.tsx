@@ -10,8 +10,6 @@ export default async function PostPage({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   if (!slug) {
     return notFound();
   }
@@ -24,13 +22,12 @@ export default async function PostPage({
 
   if (!post) {
     console.error(`Error: No post found with title ${slug}`);
-    notFound();
-    return null;
+    return notFound();
   }
 
   if (!post.body?.raw) {
     console.error("Error: post.body.code is undefined");
-    return <div>Error: No content available for this post.</div>;
+    return notFound();
   }
 
   return (

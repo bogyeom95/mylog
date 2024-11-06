@@ -6,6 +6,8 @@ export async function getPostsBy(page: number, searchQuery?: string) {
   const sortedPosts = allPosts
     .filter((post) => {
       // 검색어가 있을 경우 제목에 포함되는 게시물만 필터링
+      console.log(post);
+      if (post._raw.sourceFileName === "index.mdx") return false;
       if (!searchQuery) return true;
       return post.title.toLowerCase().includes(searchQuery.toLowerCase());
     })

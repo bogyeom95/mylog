@@ -16,17 +16,31 @@ function buildCategoryHierarchy(posts: Post[]): Record<string, CategoryNode> {
   const root: Record<string, CategoryNode> = {};
 
   posts.forEach((post) => {
-    const { sourceFileDir } = post._raw;
+    const { sourceFileDir, sourceFileName } = post._raw;
     const parts = sourceFileDir.split("/");
 
     let currentLevel = root;
-
     parts.forEach((part, index) => {
       const match = part.match(/^(\d+)-(.+)/);
       if (!match) return;
 
       const [, order, name] = match;
       const key = `${order}-${name}`;
+
+      // index.mdx 파일을 탐지하고 폴더의 이름으로 설정
+      if (sourceFileName === "index.mdx" && index === parts.length - 1) {
+        // 폴더의 최종 노드에 index.mdx의 title을 설정
+        if (!currentLevel[key]) {
+          currentLevel[key] = {
+            order: parseInt(order, 10),
+            name: post.title,
+            children: {},
+          };
+        } else {
+          currentLevel[key].name = post.title;
+        }
+        return; // index.mdx 자체는 posts에 추가하지 않음
+      }
 
       if (!currentLevel[key]) {
         currentLevel[key] = { order: parseInt(order, 10), name, children: {} };
@@ -53,19 +67,15 @@ function renderCategoryTree(
   depth = 1,
   currentPath: string
 ): JSX.Element {
-  // let containsActiveLink = false; // 하위 항목에 활성화된 링크가 있는지 확인하는 플래그
-
   const categoryElements = Object.entries(node)
     .sort(([, a], [, b]) => a.order - b.order)
     .map(([key, { name, posts = [], children }]) => {
       let isOpen = depth < 2; // 기본 상태는 첫 번째 레벨만 펼쳐짐
-      // let hasActiveChild = false; // 하위 요소 중 활성화된 요소가 있는지 여부
 
       // 포스트 리스트 생성
       const postElements = posts.map((post) => {
         const isActive = currentPath === `/posts/${post._raw.flattenedPath}`;
         if (isActive) {
-          // containsActiveLink = true;
           isOpen = true; // 현재 경로와 일치하는 경우 해당 depth를 펼침
         }
         return (
@@ -90,10 +100,6 @@ function renderCategoryTree(
         depth + 1,
         currentPath
       );
-      if (childElements && childElements.props.containsActiveLink) {
-        isOpen = true; // 하위 트리에 활성 링크가 있는 경우 펼쳐짐
-        // containsActiveLink = true;
-      }
 
       return (
         <li key={key} className="">
