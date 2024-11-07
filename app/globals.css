@@ -2,20 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "material-icons/iconfont/material-icons.css";
+
+body {
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+pre [data-line] {
+  @apply px-2;
+}
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block text-right pr-2 mr-4 border-r border-gray-300 opacity-80 text-sm w-4;
+}
+
+/* 코드 블록 전체 래퍼 스타일 */
+[data-rehype-pretty-code-figure] {
+  @apply font-mono text-sm leading-6 overflow-x-auto rounded-lg  border border-gray-300;
+}
+
+/* 코드 블록 제목 스타일 */
+[data-rehype-pretty-code-title] {
+  @apply font-semibold text-base px-4 py-2 bg-gray-100 dark:bg-gray-700 border-b border-gray-300 rounded-t-lg text-gray-800 dark:text-gray-200;
+}
+
+[data-line-numbers] {
+  @apply bg-gray-900 text-gray-400 p-2;
 }
