@@ -34,7 +34,7 @@ export default function CodeBlockContainer({
   return (
     <div className="code-block-container">
       {/* 언어 선택 드롭다운 */}
-      <div className="flex justify-end -mb-12 mr-16">
+      <div className="flex justify-end -mb-10 mr-16">
         <select
           className="block appearance-none border border-gray-300 dark:bg-gray-800 py-1 px-3 pr-8 rounded leading-tight focus:outline-none"
           value={selectedLanguage}

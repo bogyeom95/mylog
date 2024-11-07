@@ -67,7 +67,7 @@ export default function Header() {
         </div>
 
         <dialog id="my_modal_5" className="modal modal-bottom">
-          <div className="modal-box   shadow-lg bg-white">
+          <div className="modal-box   shadow-lg">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
               //  @ts-expect-error daisyui 에서 지원하는 기능

@@ -17,7 +17,10 @@ export default function CopyCodeBtn({ text }: { text: string }) {
 
   return (
     <div className="flex items-center space-x-2">
-      <button onClick={handleCopy} className="btn btn-ghost relative">
+      <button
+        onClick={handleCopy}
+        className="btn btn-ghost relative hover:bg-transparent"
+      >
         <span
           className={`material-icons-round transition-transform duration-1000 ${
             copied
