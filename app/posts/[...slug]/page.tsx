@@ -32,16 +32,9 @@ export default async function PostPage({
   return (
     <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
       <div className="w-full mx-auto ">
-        {/* <div className="border-b-2 mx-2 "> */}
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
         </Link>
-        {/* <h1 className="text-2xl font-extrabold  truncate">{post.title}</h1>
-          <p>{post.description}</p>
-          <div className="my-4">
-            <CardBodyFooter post={post} />
-          </div> */}
-        {/* </div> */}
       </div>
 
       <div className="mx-2">
