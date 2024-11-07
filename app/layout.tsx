@@ -15,11 +15,20 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | MyLog ",
-    default: "MyLog",
+    template: "Just Archives | %s",
+    default: "Just Archives",
   },
-
-  description: "tech & life blog by me",
+  description:
+    "기술 통찰과 개인적인 삶의 기록을 모아 놓은 아카이브. 다양한 생각, 아이디어, 경험이 한 곳에 담긴 여정.",
+  keywords: [
+    "기술 기록",
+    "삶의 기록",
+    "Just Archives",
+    "개인 아카이브",
+    "일상 노트",
+    "기술 인사이트",
+    "개인 블로그",
+  ],
 };
 export default function RootLayout({
   children,
@@ -34,9 +43,9 @@ export default function RootLayout({
           {/* 사이드바 - lg 이상일 때만 보이도록 설정 */}
 
           {/* 메인 콘텐츠 영역 */}
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-[calc(100vh-8rem)] ">{children}</main>
 
-          <aside className="hidden xl:flex  xl:w-1/5 sticky top-16 h-[calc(100vh-4rem)]  overflow-y-auto overflow-x-hidden z-10">
+          <aside className="hidden xl:flex  xl:w-1/5 sticky top-20 h-[calc(100vh-8rem)]  overflow-y-auto overflow-x-hidden z-10">
             <SidebarMenu />
           </aside>
         </div>

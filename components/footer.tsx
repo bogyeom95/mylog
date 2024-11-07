@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="footer flex border-t-2 mt-2  items-center p-4 justify-between">
+    <footer className="footer flex border-t-2 h-16  items-center p-4 justify-between">
       <aside className="flex items-center ">
         <svg
-          width="36"
-          height="36"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           fillRule="evenodd"
