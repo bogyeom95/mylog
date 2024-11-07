@@ -3,8 +3,12 @@ import { withContentlayer } from "next-contentlayer";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactStrictMode: true,
-  swcMinify: true,
+
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   images: {
     domains: ["i.namu.wiki"],
   },
