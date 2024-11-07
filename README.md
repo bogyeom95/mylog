@@ -19,6 +19,7 @@ Markdown과 JSX의 장점을 결합하여 자유롭게 기록을 남기고 아�
 ├── app                        # 메인 페이지
 │   └── posts
 │       └── [...slug]          # 동적 라우팅을 통해 각 게시물 페이지를 렌더링
+│
 ├── components                 # 컴포넌트 목록
 ├── docs                       # 실제 개시될 MDX 문서들
 └── public

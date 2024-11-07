@@ -1,6 +1,7 @@
 import { Post } from "@/.contentlayer/generated";
 import Image from "next/image";
 import Link from "next/link";
+import CardBodyFooter from "./post-card-footer";
 export default function PostCard({ post }: { post: Post }) {
   return (
     <Link
