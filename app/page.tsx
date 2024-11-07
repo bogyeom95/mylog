@@ -13,7 +13,7 @@ export default async function Home({
   const initialPosts = await getPostsBy(0, searchQuery);
 
   return (
-    <div className="flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
+    <div className="flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl">
       {initialPosts.length === 0 ? (
         <div className="mt-20 ">
           <h1 className="text-2xl font-semibold flex items-center gap-1">
