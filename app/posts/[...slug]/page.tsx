@@ -30,7 +30,7 @@ export default async function PostPage({
   }
 
   return (
-    <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100vw] max-w-4xl">
+    <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl">
       <div className="w-full mx-auto ">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
