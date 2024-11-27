@@ -19,7 +19,7 @@ export default function Footer() {
         <h2 className="text-lg pl-2 font-semibold">그냥 저냥 기록소...</h2>
       </aside>
       <nav className="">
-        <Link href="https://github.com/bokyum">
+        <Link href="https://github.com/bogyeom95">
           <div className="relative size-8 dark:block hidden">
             <Image
               src={"/github_logo/github-mark-white.svg"}
