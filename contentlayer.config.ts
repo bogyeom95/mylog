@@ -2,7 +2,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
-import remarkParse from "remark-parse";
+
 import { visit } from "unist-util-visit";
 
 export const Post = defineDocumentType(() => ({
@@ -38,7 +38,7 @@ export default makeSource({
   documentTypes: [Post],
 
   mdx: {
-    remarkPlugins: [remarkParse, remarkGfm],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       () => (tree) => {
         visit(tree, (node) => {
@@ -51,7 +51,7 @@ export default makeSource({
           }
         });
       },
-      [rehypePrettyCode, rehypeOptions],
+      [rehypePrettyCode, rehypeOptions] as any,
       () => (tree) => {
         visit(tree, (node) => {
           if (node?.type === "element" && node?.tagName === "figure") {
