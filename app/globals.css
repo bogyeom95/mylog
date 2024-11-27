@@ -31,19 +31,21 @@ code[data-line-numbers] {
 code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
-  @apply inline-block text-right pr-2 mr-4 border-r border-gray-300 opacity-80 text-sm w-4;
+  @apply inline-block text-right pr-2 mr-2 border-r border-slate-300 text-slate-500 opacity-80 text-sm w-6;
 }
 
 /* 코드 블록 전체 래퍼 스타일 */
 [data-rehype-pretty-code-figure] {
-  @apply font-mono text-sm leading-6 overflow-x-auto rounded-lg  border border-gray-300;
+  @apply font-mono text-sm overflow-x-auto rounded-sm border-2;
+}
+[data-rehype-pretty-code-figure] > pre {
+  @apply p-0 rounded-none;
+}
+[data-rehype-pretty-code-figure] > pre > code {
+  @apply p-2;
 }
 
 /* 코드 블록 제목 스타일 */
 [data-rehype-pretty-code-title] {
-  @apply font-semibold text-base px-4 border-b border-gray-300;
-}
-
-[data-line-numbers] {
-  @apply bg-gray-900 text-gray-400 p-2;
+  @apply font-extrabold    px-2 border-b mt-0 text-slate-700 dark:text-slate-300;
 }

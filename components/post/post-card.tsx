@@ -18,14 +18,14 @@ export default function PostCard({ post }: { post: Post }) {
                   src={post.image}
                   alt={post.title}
                   fill
-                  objectFit="cover"
+                  className="object-cover"
                 />
               ) : (
                 <Image
                   src={"image_search_28dp.svg"}
                   fill
                   alt="Empty Image"
-                  objectFit="cover"
+                  className="object-cover"
                 />
               )}
             </div>
