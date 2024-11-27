@@ -1,0 +1,287 @@
+---
+title: Next.js Overview and Features
+description: Next.js의 주요 기능과 장점에 대한 개요
+date: 2024-11-28
+image: /docs/01-dev/02-nextjs/nextjs.svg
+tags:
+  [
+    "Next.js",
+    "Server-Side Rendering",
+    "Static Site Generation",
+    "Dynamic Routes",
+  ]
+---
+
+# Next.js Overview and Features
+
+- **Next.js**는 `React 기반`의 풀스택 웹 개발 프레임워크로 **_서버 사이드 렌더링(SSR)_**과 **_정적 사이트 생성(SSG)_**을 기본적으로 지원
+- 최적화된 개발 경험, 효율적인 성능, 간단한 라우팅 및 SEO 향상과 같은 강력한 기능을 제공하여 현대적인 웹 애플리케이션 개발을 빠르게 시작할 수 있도록 도와줌
+
+---
+
+## 기존 React-Router
+
+- **URL + Component**: URL에 따라 컴포넌트를 수동으로 매핑해야 함.
+
+---
+
+## Next.js Routes
+
+- Next.js는 **파일 시스템 기반 라우터**를 사용하여 경로를 정의.
+- 폴더 구조를 기반으로 경로를 설정하며, 중첩된 폴더를 통해 자연스럽게 중첩 경로를 만들 수 있음.
+
+### Defining Routes
+
+- 각 폴더는 URL의 **경로 세그먼트**에 매핑
+- **중첩 경로**는 폴더를 중첩하여 생성
+
+예시: `app/dashboard/setting/page.tsx`
+
+위 구조는 `/dashboard/setting` 경로를 나타냄
+
+- **File-based Routing**: 폴더 구조를 통해 경로를 정의.
+- **Nested Routes**: 폴더 중첩으로 중첩 경로 생성.
+  - `app/dashboard/setting/page.tsx`
+
+### Creating UI
+
+경로 세그먼트마다 고유한 UI를 생성하려면 Nextjs의 특수 파일 규칙을 사용
+
+1. **페이지 파일 생성**
+   - 각 경로는 page.jsx 또는 page.tsx 파일로 고유 UI를 정의
+   - 파일 내 React 컴포넌트를 내보내면 해당 경로에 UI가 표시
+
+```tsx title="app/page.tsx" showLineNumbers
+export default function HomePage() {
+  return <h1>Welcome to the Homepage!</h1>;
+}
+```
+
+2. **레이아웃 재사용**
+   - 여러 경로에서 공통으로 사용되는 UI는 레이아웃 파일(`layout.js`)로 정의
+   - Header, Footer와 같은 재사용 가능한 컴포넌트를 포함할 때 유용
+
+```tsx title="app/layout.tsx" showLineNumbers
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <header>Global Navigation Bar</header>
+        {children}
+        <footer>Global Footer</footer>
+      </body>
+    </html>
+  );
+}
+```
+
+### Next.js 라우팅 특징 요약
+
+1. 파일 기반 라우팅
+
+   - 폴더와 파일로 간단하게 경로 정의.
+   - 복잡한 라우팅 설정 불필요.
+
+2. 중첩 경로 지원
+
+   - 폴더 구조를 기반으로 경로를 중첩해 직관적이고 유지보수가 쉬움.
+
+3. UI 파일 규칙
+
+   - page.tsx: 각 경로의 개별 UI 정의.
+   - layout.tsx: 경로 세그먼트 간에 공유되는 UI 정의.
+   - **특수 파일 예시:**
+     - error.js: 오류 처리.
+     - loading.js: 로딩 상태 표시.
+
+#### Example Structure
+
+```plaintext title="File System" showLineNumbers
+app/
+  ├── layout.tsx       // 글로벌 레이아웃
+  ├── page.tsx         // 홈 페이지
+  ├── dashboard/
+  │   ├── layout.tsx   // 대시보드 전용 레이아웃
+  │   ├── page.tsx     // /dashboard 경로의 UI
+  │   └── setting/
+  │       └── page.tsx // /dashboard/setting 경로의 UI
+```
+
+위 구조는 다음과 같은 경로와 UI를 지원
+
+- `/`: 홈 페이지
+- `/dashboard`: 대시보드
+- `/dashboard/setting`: 대시보드 설정
+
+[공식 문서 바로가기(routing)](https://nextjs.org/docs/app/building-your-application/routing)
+
+---
+
+## Not Found
+
+- `not-found.tsx`: 일치하지 않는 URL 처리.
+
+[공식 문서 바로가기(not-found)](https://nextjs.org/docs/app/api-reference/file-conventions/not-found)
+
+---
+
+## Nextjs에서의 Rendering
+
+NextJS가 리액트 컴포넌트를 브라우저가 이해할 수 있는 html로 변환하는 작업
+
+### CSR (Client-Side Rendering)
+
+- 모든 렌더링이 클라이언트 측에서 발생.
+- 클라이언트는 `Javascript`를 로드하고, `Javascript`가 UI를 빌드함
+
+### SSR (Server-Side Rendering)
+
+- `Nextjs`로 웹 사이트를 빌드할 때, **_기본적으로 SSR을 사용_**
+- `Nextjs`에서 모든 컴포넌트와 페이지들은 먼저 서버에서 렌더됨 (`'use client'` 사용 여부와 상관없음)
+
+[공식 문서 바로가기(rendering)](https://nextjs.org/docs/app/building-your-application/rendering)
+
+---
+
+## Hydration
+
+- 서버사이드 렌더링(SSR)을 통해 만들어 진 인터랙티브 하지 않는 HTML을 클라이언트 측 자바스크립트를 사용하여 인터랙티브한 리액트 컴포넌트로 변환하는 과정
+  - 서버 환경에서 이미 렌더링된 HTML에 React를 붙이는 작업
+- Nextjs는 초기 HTML 파일을 먼저 전달하고 이후 HTML 요소들을 React 컴포넌트로 변환 및 이벤트리스너를 부착하여 React DOM에서 관리하게 한다. 이 과정을 **Hydration**이라고 함
+
+---
+
+## `use client`
+
+- hydration 개념과 비슷
+  - `use client ~= use hidration`
+- 파일 상단에 `"use client"` 선언하여 클라이언트 컴포넌트로 설정.
+- `"use client"`는 서버와 클라이언트 컴포넌트 모듈 간의 경계를 선언하는 데 사용
+- 파일에 `"use client"`를 정의하면 하위 컴포넌트를 포함하여 해당 파일로 가져온 다른 모든 모듈이 클라이언트 번들의 일부로 간주됨
+
+[공식 문서 바로가기(client-components)](https://nextjs.org/docs/app/building-your-application/rendering/client-components)
+
+---
+
+## Dynamic Routes
+
+### App Router
+
+- 대괄호(`[]`)로 동적 세그먼트 정의.
+
+  ```tsx title="app/blog/[slug]/page.tsx" showLineNumbers
+  export default function Page({ params }: { params: { slug: string } }) {
+    return My Post: {params.slug};
+  }
+  ```
+
+[공식 문서 바로가기(Dynamic Routes)](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
+
+---
+
+## Fetch
+
+### Server-Side Fetch
+
+- Nextjs의 fetch API는 캐싱 설정 지원.
+
+[공식 문서 바로가기(fetch)](https://nextjs.org/docs/app/api-reference/functions/fetch)
+
+---
+
+## Loading
+
+### Loading UI and Streaming
+
+- `loading.js`는 `React Suspense`를 사용하여 의미 있는 로딩 UI를 만드는 데 도움
+- 이 규칙을 사용하면 route 세그먼트의 콘텐츠가 로드되는 동안 서버에서 즉시 로딩 상태를 표시할 수 있음
+
+  - 렌더링이 완료되면 새 콘텐츠가 자동으로 교체
+
+  ```tsx title="loading.tsx" showLineNumbers
+  export default function Loading() {
+    // You can add any UI inside Loading, including a Skeleton.
+    return <LoadingSkeleton />;
+  }
+  ```
+
+[공식 문서 바로가기(loading-ui-and-streaming)](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)
+
+---
+
+## Error Handling
+
+### Error Boundary
+
+- `error.js` 파일 규칙을 사용하면 중첩된 경로에서 예기치 않은 런타임 오류를 적절하게 처리할 수 있음
+- `error.js`는 중첩된 하위 세그먼트 또는 page.js 구성 요소를 래핑하는 React Error Boundary를 자동으로 생성
+- `error.js` 파일에서 내보낸 React 컴포넌트가 fallback 컴포넌트로 사용
+
+[공식 문서 바로가기(error-handling)](https://nextjs.org/docs/app/building-your-application/routing/error-handling)
+
+---
+
+## CSS Module
+
+### CSS Modules
+
+- Nextjs에는 `.module.css` 확장자를 사용하여 CSS 모듈을 기본적으로 지원
+- CSS 모듈은 고유한 클래스 이름을 자동으로 생성하여 CSS 범위를 로컬로 지정
+- 컴포넌트 수준의 CSS 관리에 이상적.
+
+### Global Styles
+
+- `global.css`를 통해 애플리케이션 전체에 스타일 적용 가능.
+
+[공식 문서 바로가기(Styleing)](https://nextjs.org/docs/app/building-your-application/styling)
+
+## Dynamic Metadata
+
+- Next.js에서 메타데이터는 HTML `<head>` 요소에 렌더링되는 태그로, SEO와 웹페이지의 정보를 설정하는 데 사용
+- `Dynamic Metadata`는 특정 경로에 따라 메타데이터를 프로그래밍적으로 생성할 수 있게 해주는 기능
+- 이 기능은 데이터 기반 애플리케이션에서, 사용자 맞춤형 메타 정보를 제공하거나 SEO 요구 사항에 동적으로 대응할 때 유용
+
+### generateMetadata Function
+
+- generateMetadata는 비동기 함수로 정의되며, 특정 페이지가 렌더링되기 전에 실행
+- 주로 서버에서 데이터를 가져와, 해당 데이터에 기반하여 메타데이터를 생성하는 데 사용
+- 서버 컴포넌트에서만 동작하며 클라이언트에서 호출되지 않음
+
+```tsx title="page.tsx" showLineNumbers
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await fetch("https://api.example.com/resource");
+  const result = await data.json();
+
+  return {
+    title: result.title,
+    description: result.description,
+  };
+}
+```
+
+#### 중요 주의 사항
+
+1. 서버 컴포넌트에서만 지원
+
+   - `generateMetadata` 함수는 서버에서만 동작하며, 클라이언트 컴포넌트에서는 사용할 수 없음
+
+2. 중복 사용 불가
+   - 동일한 경로에서 `Metadata Fields`와 `generateMetadata` 함수를 동시에 export하면 에러가 발생
+
+[공식 문서 바로가기(generatemetadata-function)](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function)
+
+### Metadata Fields
+
+- 정적 메타데이터를 정의할 때 사용되는 객체
+- 경로가 동적이지 않거나, 데이터 의존성이 없는 경우 metadata 객체를 사용하여 간단히 설정할 수 있음
+
+```tsx title="layout.ts | page.ts" showLineNumbers
+export const metadata = {
+  title: "Next.js",
+};
+```
+
+[공식 문서 바로 가기(metadata-fields)](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields)
