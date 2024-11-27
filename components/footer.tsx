@@ -25,7 +25,7 @@ export default function Footer() {
               src={"/github_logo/github-mark-white.svg"}
               fill
               alt="GitHub Logo white"
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
           <div className="relative size-8 dark:hidden block">
@@ -33,7 +33,7 @@ export default function Footer() {
               src={"/github_logo/github-mark.svg"}
               fill
               alt="GitHub Logo"
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
         </Link>

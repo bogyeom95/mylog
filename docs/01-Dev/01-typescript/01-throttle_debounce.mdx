@@ -1,0 +1,95 @@
+---
+title: "Throttle & Debounce"
+date: "2024-11-27"
+description: "Throttle과 Debounce에 대한 설명과 구현 방법"
+image: /docs/01-dev/01-typescript/01-throttle_debounce_1.svg
+tags: ["Throttle", "Debounce", "TypeScript", "Performance"]
+---
+
+# Throttle & Debounce
+
+- `Throttle` 과 `Debounce` 는 애니메이션의 성능을 고려한다면 선택이 아닌 필수 개념 요소
+- 자주 사용되는 이벤트나 함수들의 실행 빈도를 줄여서, 성능 상의 유리함을 가져오기 위한 개념
+- 예를 들어, 사용자가 키보드 입력을 할 때마다 API 호출이 발생한다면, 이는 **사용자의 의도와 무관한 과도한 요청**으로 이어질 수 있음
+- 이를 방지하기 위해, 입력이 끝난 후나 입력 중간 중간 200ms 간격으로 API 호출을 제어하면 성능 상 큰 이점을 얻을 수 있음
+
+## Debounce 란?
+
+💡 **Debounce**
+
+- 입력 주기가 끝난 후 이벤트를 호출
+- 마지막 입력이 발생한 이후 특정 시간 동안 대기한 뒤 실행
+
+## Throttle 이란?
+
+💡 **Throttle**
+
+- 입력 주기를 방해하지 않고, 일정 시간 간격마다 이벤트를 호출
+- 주어진 시간 동안 발생한 여러 입력을 하나의 이벤트로 묶어 처리
+
+---
+
+## 사용 사례
+
+### Throttle
+
+- 스크롤 이벤트 처리
+  - 스크롤 중 매번 연산을 수행하지 않고, 200ms 간격으로 화면 위치 계산 및 UI 업데이트
+- 윈도우 크기 조정 이벤트
+  - 리사이즈 중 너무 잦은 레이아웃 계산을 방지하기 위해 제한적으로 실행
+
+### Debounce
+
+- 실시간 검색
+  - 키보드 입력 후 200ms 동안 입력이 멈췄을 때만 API 호출
+- 폼 유효성 검사
+  - 입력 필드에서 타이핑이 멈춘 후 일정 시간 후에만 검증 로직 실행
+
+---
+
+## Throttle과 Debounce 비교
+
+|           |              Throttle               |               Debounce                |
+| --------- | :---------------------------------: | :-----------------------------------: |
+| 실행 시점 |         일정 간격마다 실행          | 마지막 이벤트 이후 지정된 시간에 실행 |
+| 사용 목적 |    주기적으로 실행이 필요한 경우    |  빈번한 이벤트 호출을 제어하는 경우   |
+| 사용 예시 | 스크롤 이벤트, 리사이즈 이벤트 처리 |       검색 입력, 폼 유효성 검사       |
+
+---
+
+## 구현 코드
+
+### Debounce
+
+```typescript title="debounce" showLineNumbers
+export function debounce<T extends (...args: any[]) => unknown>(
+  callback: T,
+  delay: number = 200
+): (...args: Parameters<T>) => void {
+  let timeout: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<T>): void => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => callback(...args), delay);
+  };
+}
+```
+
+### Throttle
+
+```typescript title="throttle" showLineNumbers
+export function throttle<T extends (...args: any[]) => unknown>(
+  callback: T,
+  limit: number = 200
+): (...args: Parameters<T>) => void {
+  let waiting = false;
+  return (...args: Parameters<T>): void => {
+    if (!waiting) {
+      callback(...args);
+      waiting = true;
+      setTimeout(() => {
+        waiting = false;
+      }, limit);
+    }
+  };
+}
+```
