@@ -10,22 +10,22 @@ export default function PostCard({ post }: { post: Post }) {
       className="contents"
     >
       <div key={post.title} className="flex w-full flex-col">
-        <div className="border-b-2 p-4  transition duration-200 ease-in-out hover:scale-105 ">
+        <div className="border-b-2 border-b-slate-500 p-2 xl:p-4">
           <div className="flex flex-row gap-4">
-            <div className="relative h-28 w-28 rounded-md flex-shrink-0 ">
+            <div className="relative h-36 w-36 rounded-md flex-shrink-0   dark:bg-slate-700  ">
               {post.image ? (
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
-                  className="object-cover"
+                  className="object-cover p-1"
                 />
               ) : (
                 <Image
                   src={"image_search_28dp.svg"}
                   fill
                   alt="Empty Image"
-                  className="object-cover"
+                  className="object-cover p-1"
                 />
               )}
             </div>
@@ -36,7 +36,7 @@ export default function PostCard({ post }: { post: Post }) {
               <p className="pt-2 line-clamp-3">{post.description}</p>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-2">
             <CardBodyFooter post={post} />
           </div>
         </div>

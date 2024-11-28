@@ -52,7 +52,7 @@ export default function RootLayout({
           {/* 메인 콘텐츠 영역 */}
           <main className="min-h-[calc(100svh-8rem)]">{children}</main>
 
-          <aside className="hidden xl:flex  xl:w-1/5 sticky top-20  min-h-[calc(100svh-8rem)]  overflow-y-auto overflow-x-hidden z-10">
+          <aside className="hidden xl:flex  xl:w-1/5 sticky top-20  h-[calc(100vh-8rem)]  overflow-y-auto overflow-x-hidden z-10">
             <SidebarMenu />
           </aside>
         </div>

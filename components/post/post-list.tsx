@@ -59,7 +59,7 @@ export default function PostList({
           <span className="loading loading-dots loading-md "></span>
         </span>
       ) : (
-        <h1 className="text-2xl font-semibold flex items-center gap-1">
+        <h1 className="text-2xl font-semibold flex items-center gap-1 my-20">
           <span className="material-icons-round text-4xl">
             sentiment_very_dissatisfied
           </span>
