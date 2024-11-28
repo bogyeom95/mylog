@@ -14,7 +14,7 @@ export async function getPostsBy(page: number, searchQuery?: string) {
     .sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date))); // 최신 날짜순으로 정렬
 
   // 페이지 네이션 처리
-  const pageSize = 10;
+  const pageSize = 1;
   const start = page * pageSize;
   const paginatedPosts = sortedPosts.slice(start, start + pageSize);
 

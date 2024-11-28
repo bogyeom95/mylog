@@ -22,7 +22,6 @@ code[data-theme*=" "] span {
 }
 
 pre [data-line] {
-  @apply px-2;
 }
 code[data-line-numbers] {
   counter-reset: line;
@@ -31,21 +30,27 @@ code[data-line-numbers] {
 code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
-  @apply inline-block text-right pr-2 mr-2 border-r border-slate-300 text-slate-500 opacity-80 text-sm w-6;
+  @apply inline-block text-right pr-2 mr-2 border-r border-slate-300 text-slate-500   w-6;
 }
 
 /* 코드 블록 전체 래퍼 스타일 */
 [data-rehype-pretty-code-figure] {
-  @apply font-mono text-sm overflow-x-auto rounded-sm border-2;
+  @apply overflow-x-auto rounded-sm border-2;
 }
 [data-rehype-pretty-code-figure] > pre {
   @apply p-0 rounded-none;
+  background-color: var(--shiki-light-bg);
 }
 [data-rehype-pretty-code-figure] > pre > code {
-  @apply p-2;
+  @apply p-2  text-sm;
+}
+@media (prefers-color-scheme: dark) {
+  [data-rehype-pretty-code-figure] > pre {
+    background-color: var(--shiki-dark-bg);
+  }
 }
 
 /* 코드 블록 제목 스타일 */
 [data-rehype-pretty-code-title] {
-  @apply font-extrabold    px-2 border-b mt-0 text-slate-700 dark:text-slate-300;
+  @apply font-semibold    pl-2 border-b-2 mt-0 text-slate-700 dark:text-slate-300;
 }
