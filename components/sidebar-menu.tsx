@@ -110,9 +110,9 @@ function renderCategoryTree(
               {Object.keys(children).length > 0 && childElements}
             </>
           ) : (
-            <details open={isOpen} className="w-full">
+            <details open={isOpen}>
               <summary className="flex items-center gap-1 cursor-pointer">
-                {name}
+                <span className="max-w-32 truncate">{name}</span>
                 {!isOpen && childrenCount > 0 && (
                   <span className="pr-2">({childrenCount})</span>
                 )}
