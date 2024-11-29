@@ -1,15 +1,27 @@
 import { allPosts } from "@/.contentlayer/generated";
 import { parseISO, compareDesc } from "date-fns";
 
+function sanitizeSearchQuery(query?: string): string {
+  if (!query) return "";
+  const maxLength = 100;
+  const sanitizedQuery = query.trim().substring(0, maxLength);
+  return sanitizedQuery;
+}
+
 export async function getPostsBy(page: number, searchQuery?: string) {
-  // 모든 게시물을 날짜순으로 정렬
+  const query = sanitizeSearchQuery(searchQuery);
   const sortedPosts = allPosts
     .filter((post) => {
-      // 검색어가 있을 경우 제목에 포함되는 게시물만 필터링
-
       if (post._raw.sourceFileName === "index.mdx") return false;
-      if (!searchQuery) return true;
-      return post.title.toLowerCase().includes(searchQuery.toLowerCase());
+      if (!query) return true;
+      if (
+        post.tags
+          ?.map((tag) => tag.toLocaleLowerCase())
+          .find((tag) => tag.includes(query))
+      )
+        return true;
+
+      return post.title.toLowerCase().includes(query);
     })
     .sort((a, b) => compareDesc(parseISO(a.date), parseISO(b.date))); // 최신 날짜순으로 정렬
 

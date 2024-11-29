@@ -8,7 +8,7 @@ export default function PostList({
   searchQuery,
 }: {
   initialPosts: Post[];
-  searchQuery?: string;
+  searchQuery: string;
 }) {
   const [posts, setPosts] = React.useState<Post[]>(initialPosts);
   const [page, setPage] = React.useState(0);
@@ -16,8 +16,6 @@ export default function PostList({
   const trigger = React.useRef<HTMLSpanElement>(null);
 
   React.useEffect(() => {
-    // 현재 페이지가 /home일때만 실행
-
     const observer = new IntersectionObserver(
       async (
         entries: IntersectionObserverEntry[],
@@ -46,7 +44,7 @@ export default function PostList({
     return () => {
       observer.disconnect();
     };
-  }, [page, searchQuery]);
+  }, [page]);
 
   return (
     <>
