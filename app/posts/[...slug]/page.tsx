@@ -91,12 +91,12 @@ export default async function PostPage({
   });
 
   if (!post) {
-    console.error(`Error: No post found with title ${slug}`);
     return notFound();
   }
-
+  if (post._raw.sourceFileName === "index.mdx") {
+    return notFound();
+  }
   if (!post.body?.code) {
-    console.error("Error: post.body.code is undefined");
     return notFound();
   }
 

@@ -8,7 +8,7 @@ export default async function Home({
 }) {
   const q = (await searchParams).q;
 
-  const searchQuery = decodeURIComponent(String(q || ""));
+  const searchQuery = decodeURIComponent(String(q || "").trim());
 
   const initialPosts = await getPostsBy(0, searchQuery);
 
@@ -24,7 +24,11 @@ export default async function Home({
           </h1>
         </div>
       ) : (
-        <PostList initialPosts={initialPosts} searchQuery={searchQuery} />
+        <PostList
+          key={searchQuery}
+          initialPosts={initialPosts}
+          searchQuery={searchQuery}
+        />
       )}
     </div>
   );
