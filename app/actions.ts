@@ -9,15 +9,18 @@ function sanitizeSearchQuery(query?: string): string {
 }
 
 export async function getPostsBy(page: number, searchQuery?: string) {
+  // 타임아웃
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const query = sanitizeSearchQuery(searchQuery);
   const sortedPosts = allPosts
-    .filter((post) => {
+    .filter(post => {
       if (post._raw.sourceFileName === "index.mdx") return false;
       if (!query) return true;
       if (
         post.tags
-          ?.map((tag) => tag.toLocaleLowerCase())
-          .find((tag) => tag.includes(query))
+          ?.map(tag => tag.toLocaleLowerCase())
+          .find(tag => tag.includes(query))
       )
         return true;
 

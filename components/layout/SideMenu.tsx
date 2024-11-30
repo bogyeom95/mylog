@@ -15,7 +15,7 @@ type CategoryNode = {
 function buildCategoryHierarchy(posts: Post[]): Record<string, CategoryNode> {
   const root: Record<string, CategoryNode> = {};
 
-  posts.forEach((post) => {
+  posts.forEach(post => {
     const { sourceFileDir, sourceFileName } = post._raw;
     const parts = sourceFileDir.split("/");
 
@@ -73,7 +73,7 @@ function renderCategoryTree(
       let isOpen = depth < 2; // 기본 상태는 첫 번째 레벨만 펼쳐짐
 
       // 포스트 리스트 생성
-      const postElements = posts.map((post) => {
+      const postElements = posts.map(post => {
         const isActive = currentPath === `/posts/${post._raw.flattenedPath}`;
         if (isActive) {
           isOpen = true; // 현재 경로와 일치하는 경우 해당 depth를 펼침
@@ -82,7 +82,7 @@ function renderCategoryTree(
           <li key={post._id} className="">
             <Link href={`/posts/${post._raw.flattenedPath}`}>
               <span
-                className={`${isActive ? "text-blue-500 " : ""}  block  truncate`}
+                className={`${isActive ? "text-blue-500" : ""} block truncate`}
               >
                 {post.title}
               </span>
@@ -105,13 +105,13 @@ function renderCategoryTree(
         <li key={key} className="">
           {depth === 1 ? (
             <>
-              <h2 className="font-semibold text-lg">{name}</h2>
+              <h2 className="text-lg font-semibold">{name}</h2>
               {postElements.length > 0 && <ul>{postElements}</ul>}
               {Object.keys(children).length > 0 && childElements}
             </>
           ) : (
             <details open={isOpen}>
-              <summary className="flex items-center gap-1 cursor-pointer">
+              <summary className="flex cursor-pointer items-center gap-1">
                 <span className="max-w-32 truncate">{name}</span>
                 {!isOpen && childrenCount > 0 && (
                   <span className="pr-2">({childrenCount})</span>
@@ -128,7 +128,7 @@ function renderCategoryTree(
   return <ul>{categoryElements}</ul>;
 }
 
-export default function SidebarMenu(): JSX.Element {
+export default function SideMenu(): JSX.Element {
   const currentPath = usePathname(); // 현재 URL 경로 가져오기
   const categoryHierarchy = buildCategoryHierarchy(allPosts);
 

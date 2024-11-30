@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import CopyCodeBtn from "./copy-code-btn";
+import CopyCodeBtn from "./CopyCodeBtn";
 
 type Props = HTMLAttributes<HTMLElement> & {
   __raw__?: string;
@@ -8,16 +8,14 @@ type Props = HTMLAttributes<HTMLElement> & {
 export const Figcaption = ({
   children,
   __raw__,
-
   ...props
 }: React.PropsWithChildren<Props>) => {
   return (
     <figcaption {...props}>
-      <div className={"flex justify-between items-center"}>
+      <div className={"flex items-center justify-between"}>
         {children}
-        <div className="flex items-center">
-          <CopyCodeBtn text={__raw__ || ""} />
-        </div>
+
+        <CopyCodeBtn text={__raw__ || ""} />
       </div>
     </figcaption>
   );

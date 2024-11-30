@@ -1,18 +1,70 @@
 import { allPosts, Post } from "contentlayer/generated";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MDXReader from "@/components/mdx-reader";
-export async function generateMetadata({
+import MDXReader from "@/components/mdx/MDXReader";
+import Container from "@/components/Container";
+
+const isInvalidPost = (post: Post) => {
+  if (!post) {
+    return true;
+  }
+  if (post._raw.sourceFileName === "index.mdx") {
+    return true;
+  }
+  if (!post.body?.code) {
+    return true;
+  }
+
+  return false;
+};
+
+const getPostByPath = (flattenedPath: string) => {
+  return allPosts.find(post => {
+    return post._raw.flattenedPath === flattenedPath;
+  });
+};
+
+export default async function PostPage({
   params,
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  const flattenedPath = slug.join("/");
+  if (!slug) {
+    return notFound();
+  }
 
-  const post: Post | undefined = allPosts.find(
-    (post) => post._raw.flattenedPath === flattenedPath
+  const post: Post | undefined = getPostByPath(slug.join("/"));
+
+  if (!post || isInvalidPost(post)) {
+    return notFound();
+  }
+
+  return (
+    //  <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl"></div>
+    <Container className="flex flex-col">
+      <div className="mx-auto mb-4 w-full">
+        <Link href="/" className="text-blue-500 hover:underline">
+          ← Back to all posts
+        </Link>
+      </div>
+
+      <div className="mx-2">
+        <MDXReader post={post} />
+      </div>
+    </Container>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  const { slug } = await params;
+  const flattenedPath = slug ? slug.join("/") : "";
+  const post: Post | undefined = getPostByPath(flattenedPath);
 
   const baseUrl = process.env.BASE_URL;
   const defaultMeta = {
@@ -21,7 +73,6 @@ export async function generateMetadata({
   };
 
   if (!post) {
-    // 게시물이 없는 경우 검색 엔진이 페이지를 인덱싱하지 않도록 robots 메타 태그 추가
     return {
       title: "Post not found",
       description: "The requested post does not exist.",
@@ -72,45 +123,4 @@ export async function generateMetadata({
       },
     ],
   };
-}
-
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<{ slug: string[] }>;
-}) {
-  const { slug } = await params;
-  if (!slug) {
-    return notFound();
-  }
-
-  const flattenedPath = slug.join("/");
-
-  const post: Post | undefined = allPosts.find((post) => {
-    return post._raw.flattenedPath === flattenedPath;
-  });
-
-  if (!post) {
-    return notFound();
-  }
-  if (post._raw.sourceFileName === "index.mdx") {
-    return notFound();
-  }
-  if (!post.body?.code) {
-    return notFound();
-  }
-
-  return (
-    <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl">
-      <div className="w-full mx-auto ">
-        <Link href="/" className="text-blue-500 hover:underline">
-          ← Back to all posts
-        </Link>
-      </div>
-
-      <div className="mx-2">
-        <MDXReader post={post} />
-      </div>
-    </div>
-  );
 }
