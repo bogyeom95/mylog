@@ -11,10 +11,10 @@ export const TagPlatter = ({
 }: PropsWithChildren<TagPlatterProps>) => {
   return (
     <div className={cn("flex flex-wrap gap-2", className)}>
-      {tags?.map((tag) => (
+      {tags?.map(tag => (
         <span
           key={tag}
-          className=" truncate overflow-hidden text-sm font-semibold  border-b-2 border-b-slate-400"
+          className="overflow-hidden truncate border-b-2 border-b-slate-400 text-sm font-semibold"
         >
           {`#${tag}`}
         </span>

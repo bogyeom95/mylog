@@ -8,7 +8,7 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const q = (await searchParams).q;
   const searchQuery = decodeURIComponent(String(q || "").trim());
   const initialPosts = await getPostsBy(0, searchQuery);

@@ -26,8 +26,8 @@ export default function PostCardList({
   const loadMorePosts = async () => {
     const newPosts = await getPostsBy(page + 1, searchQuery);
     if (newPosts.length !== 0) {
-      setPage((prev) => prev + 1);
-      setPosts((prev) => [...prev, ...newPosts]);
+      setPage(prev => prev + 1);
+      setPosts(prev => [...prev, ...newPosts]);
     } else {
       setIsLastPage(true);
     }
@@ -59,13 +59,13 @@ export default function PostCardList({
 
   return (
     <div className={cn(className)}>
-      {posts.map((post) => (
+      {posts.map(post => (
         <PostCard key={post.title} post={post} />
       ))}
 
-      <div className="w-full flex justify-center my-20">
+      <div className="my-20 flex w-full justify-center">
         {!isLastPage && (
-          <span ref={trigger} className="loading loading-dots loading-md " />
+          <span ref={trigger} className="loading loading-dots loading-md" />
         )}
 
         <StateInfo show={isLastPage} text={"No More Post..."} />

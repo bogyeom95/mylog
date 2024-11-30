@@ -12,7 +12,7 @@ export const Figcaption = ({
 }: React.PropsWithChildren<Props>) => {
   return (
     <figcaption {...props}>
-      <div className={"flex justify-between items-center"}>
+      <div className={"flex items-center justify-between"}>
         {children}
 
         <CopyCodeBtn text={__raw__ || ""} />

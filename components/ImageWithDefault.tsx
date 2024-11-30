@@ -15,7 +15,7 @@ export const ImageWithDefault = ({
   return (
     <div
       className={cn(
-        "relative h-36 w-36 rounded-md flex-shrink-0   dark:bg-slate-700 ",
+        "relative h-36 w-36 flex-shrink-0 rounded-md dark:bg-slate-700",
         className
       )}
     >

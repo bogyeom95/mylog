@@ -12,7 +12,7 @@ export default function Container({
   return (
     <div
       className={cn(
-        `flex flex-row flex-wrap justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl`,
+        "mx-auto mt-4 flex w-[100dvw] max-w-4xl flex-row flex-wrap justify-center gap-6",
         className
       )}
     >

@@ -31,7 +31,7 @@ const TitleAndDescription = ({
 }: PropsWithChildren<TitleAndDescriptionProps>) => {
   return (
     <div className={`flex flex-col gap-2 overflow-hidden`}>
-      <h1 className="text-2xl font-extrabold truncate ">{title}</h1>
+      <h1 className="truncate text-2xl font-extrabold">{title}</h1>
       <p className="line-clamp-3">{description}</p>
     </div>
   );

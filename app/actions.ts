@@ -14,13 +14,13 @@ export async function getPostsBy(page: number, searchQuery?: string) {
 
   const query = sanitizeSearchQuery(searchQuery);
   const sortedPosts = allPosts
-    .filter((post) => {
+    .filter(post => {
       if (post._raw.sourceFileName === "index.mdx") return false;
       if (!query) return true;
       if (
         post.tags
-          ?.map((tag) => tag.toLocaleLowerCase())
-          .find((tag) => tag.includes(query))
+          ?.map(tag => tag.toLocaleLowerCase())
+          .find(tag => tag.includes(query))
       )
         return true;
 

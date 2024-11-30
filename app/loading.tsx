@@ -5,7 +5,7 @@ export default function Loading() {
     <Container>
       {[...Array(10)].map((_, i) => (
         <div key={i} className="w-full transition duration-100 ease-in-out">
-          <div className="flex flex-col gap-4 border border-base-300 bg-base-100 rounded-lg p-4">
+          <div className="flex flex-col gap-4 rounded-lg border border-base-300 bg-base-100 p-4">
             <Top />
             <Bottom />
           </div>
@@ -19,11 +19,11 @@ const Top = () => {
   return (
     <div className="flex flex-row gap-4">
       {/* Image skeleton */}
-      <div className="relative h-36 w-36 overflow-hidden rounded-md skeleton"></div>
+      <div className="skeleton relative h-36 w-36 overflow-hidden rounded-md"></div>
 
-      <div className="flex flex-col gap-2 flex-grow">
+      <div className="flex flex-grow flex-col gap-2">
         {/* Title skeleton */}
-        <div className="skeleton h-6 w-3/4 rounded "></div>
+        <div className="skeleton h-6 w-3/4 rounded"></div>
         {/* Description skeleton */}
         <div className="skeleton h-4 w-4/5 rounded"></div>
         <div className="skeleton h-4 w-2/3 rounded"></div>
@@ -35,7 +35,7 @@ const Top = () => {
 
 const Bottom = () => {
   return (
-    <div className="flex items-center justify-between mt-auto">
+    <div className="mt-auto flex items-center justify-between">
       <div className="flex flex-wrap gap-2">
         {/* Tags skeleton */}
         {[...Array(3)].map((_, j) => (

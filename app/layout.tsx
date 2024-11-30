@@ -26,7 +26,7 @@ export default function RootLayout({
         <div className="flex justify-center">
           <main className="min-h-[calc(100svh-8rem)]">{children}</main>
 
-          <aside className="hidden xl:flex  xl:w-1/5 sticky top-20  h-[calc(100vh-8rem)]  overflow-y-auto overflow-x-hidden z-10">
+          <aside className="sticky top-20 z-10 hidden h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden xl:flex xl:w-1/5">
             <SideMenu />
           </aside>
         </div>

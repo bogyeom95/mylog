@@ -19,7 +19,7 @@ const isInvalidPost = (post: Post) => {
 };
 
 const getPostByPath = (flattenedPath: string) => {
-  return allPosts.find((post) => {
+  return allPosts.find(post => {
     return post._raw.flattenedPath === flattenedPath;
   });
 };
@@ -41,8 +41,8 @@ export default async function PostPage({
   }
 
   return (
-    <Container className="flex flex-col ">
-      <div className="w-full mx-auto ">
+    <Container className="flex flex-col">
+      <div className="mx-auto w-full">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
         </Link>
@@ -60,7 +60,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const { slug } = await params;
   const flattenedPath = slug ? slug.join("/") : "";
   const post: Post | undefined = getPostByPath(flattenedPath);

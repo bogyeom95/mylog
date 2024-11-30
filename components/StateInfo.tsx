@@ -16,7 +16,7 @@ export default function StateInfo({
   return (
     <h1
       className={cn(
-        "text-2xl font-semibold flex items-center gap-1 my-20",
+        "my-20 flex items-center gap-1 text-2xl font-semibold",
         {
           hidden: !show,
         },

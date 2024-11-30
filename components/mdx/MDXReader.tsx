@@ -18,7 +18,7 @@ export default function MDXReader({ post }: MDXReaderProps) {
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <div className="prose dark:prose-dark mb-20">
+    <div className="dark:prose-dark prose mb-20">
       <MDXContent components={components} />
     </div>
   );

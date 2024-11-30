@@ -17,7 +17,7 @@ export default function TimeFormatter({
   return (
     <time
       dateTime={date}
-      className={cn("font-semibold  flex-shrink-0", className)}
+      className={cn("flex-shrink-0 font-semibold", className)}
     >
       {format(parseISO(date), dateFormat, { locale: ko })}
     </time>
