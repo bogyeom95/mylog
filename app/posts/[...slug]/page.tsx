@@ -5,9 +5,6 @@ import MDXReader from "@/components/mdx/MDXReader";
 import Container from "@/components/Container";
 
 const isInvalidPost = (post: Post) => {
-  if (!post) {
-    return true;
-  }
   if (post._raw.sourceFileName === "index.mdx") {
     return true;
   }
@@ -30,10 +27,6 @@ export default async function PostPage({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  if (!slug) {
-    return notFound();
-  }
-
   const post: Post | undefined = getPostByPath(slug.join("/"));
 
   if (!post || isInvalidPost(post)) {
@@ -41,7 +34,6 @@ export default async function PostPage({
   }
 
   return (
-    //  <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl"></div>
     <Container className="flex flex-col">
       <div className="mx-auto mb-4 w-full">
         <Link href="/" className="text-blue-500 hover:underline">
@@ -61,7 +53,6 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
-  await new Promise(resolve => setTimeout(resolve, 1000));
   const { slug } = await params;
   const flattenedPath = slug ? slug.join("/") : "";
   const post: Post | undefined = getPostByPath(flattenedPath);
