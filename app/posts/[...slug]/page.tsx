@@ -2,6 +2,7 @@ import { allPosts, Post } from "contentlayer/generated";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import MDXReader from "@/components/mdx/MDXReader";
+import Container from "@/components/Container";
 
 const isInvalidPost = (post: Post) => {
   if (!post) {
@@ -40,7 +41,7 @@ export default async function PostPage({
   }
 
   return (
-    <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl">
+    <Container className="flex flex-col ">
       <div className="w-full mx-auto ">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
@@ -50,7 +51,7 @@ export default async function PostPage({
       <div className="mx-2">
         <MDXReader post={post} />
       </div>
-    </div>
+    </Container>
   );
 }
 
