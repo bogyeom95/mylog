@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function loading() {
   return (
     <Container className="flex flex-col gap-2">
-      <div className="mx-auto w-full">
+      <div className="mx-auto mb-4 w-full">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
         </Link>

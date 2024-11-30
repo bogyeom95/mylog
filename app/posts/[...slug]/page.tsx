@@ -41,8 +41,9 @@ export default async function PostPage({
   }
 
   return (
+    //  <div className="flex flex-col  justify-center gap-6 mt-4 mx-auto w-[100dvw] max-w-4xl"></div>
     <Container className="flex flex-col">
-      <div className="mx-auto w-full">
+      <div className="mx-auto mb-4 w-full">
         <Link href="/" className="text-blue-500 hover:underline">
           ← Back to all posts
         </Link>

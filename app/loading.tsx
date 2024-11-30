@@ -2,12 +2,12 @@ import Container from "@/components/Container";
 
 export default function Loading() {
   return (
-    <Container>
+    <Container className="flex flex-col gap-2">
       {[...Array(10)].map((_, i) => (
         <div key={i} className="w-full transition duration-100 ease-in-out">
           <div className="flex flex-col gap-4 rounded-lg border border-base-300 bg-base-100 p-4">
-            <Top />
-            <Bottom />
+            <CardHeader />
+            <CardFooter />
           </div>
         </div>
       ))}
@@ -15,7 +15,7 @@ export default function Loading() {
   );
 }
 
-const Top = () => {
+const CardHeader = () => {
   return (
     <div className="flex flex-row gap-4">
       {/* Image skeleton */}
@@ -33,7 +33,7 @@ const Top = () => {
   );
 };
 
-const Bottom = () => {
+const CardFooter = () => {
   return (
     <div className="mt-auto flex items-center justify-between">
       <div className="flex flex-wrap gap-2">

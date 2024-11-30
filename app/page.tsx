@@ -8,14 +8,13 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  await new Promise(resolve => setTimeout(resolve, 1000));
   const q = (await searchParams).q;
   const searchQuery = decodeURIComponent(String(q || "").trim());
   const initialPosts = await getPostsBy(0, searchQuery);
 
   if (!initialPosts || initialPosts.length === 0) {
     return (
-      <Container>
+      <Container className="flex justify-center">
         <StateInfo text="검색결과가 없습니다." />
       </Container>
     );
