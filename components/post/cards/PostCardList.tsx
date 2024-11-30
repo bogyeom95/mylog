@@ -60,7 +60,7 @@ export default function PostCardList({
   return (
     <div className={cn(className)}>
       {posts.map(post => (
-        <PostCard key={post.title} post={post} />
+        <PostCard key={post._id} post={post} />
       ))}
 
       <div className="my-20 flex w-full justify-center">
