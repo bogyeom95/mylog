@@ -34,9 +34,6 @@ export default function Header() {
               <span className="pl-2 font-semibold sm:block text-2xl ">
                 <span>그냥 저냥 기록소</span>
               </span>
-              {/* <span className="pl-2 font-semibold text-2xl sm:hidden">
-                <span>기록소</span>
-              </span> */}
             </h2>
           </Link>
 

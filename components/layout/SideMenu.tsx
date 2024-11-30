@@ -128,7 +128,7 @@ function renderCategoryTree(
   return <ul>{categoryElements}</ul>;
 }
 
-export default function SidebarMenu(): JSX.Element {
+export default function SideMenu(): JSX.Element {
   const currentPath = usePathname(); // 현재 URL 경로 가져오기
   const categoryHierarchy = buildCategoryHierarchy(allPosts);
 

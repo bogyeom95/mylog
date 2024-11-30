@@ -59,6 +59,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string[] }>;
 }) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const { slug } = await params;
   const flattenedPath = slug ? slug.join("/") : "";
   const post: Post | undefined = getPostByPath(flattenedPath);

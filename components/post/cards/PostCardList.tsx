@@ -2,22 +2,22 @@
 import { Post } from "@/.contentlayer/generated";
 import { getPostsBy } from "@/app/actions";
 import React, { PropsWithChildren } from "react";
-import PostCard from "./post-card";
-import StateInfo from "../StateInfo";
+import PostCard from "./card/PostCard";
+import StateInfo from "../../StateInfo";
 import cn from "classnames";
 
-interface PostListProps {
+interface PostCardListProps {
   className?: string;
   initialPosts: Post[];
   searchQuery: string;
 }
 
-export default function PostList({
+export default function PostCardList({
   className,
   initialPosts,
 
   searchQuery,
-}: PropsWithChildren<PostListProps>) {
+}: PropsWithChildren<PostCardListProps>) {
   const [posts, setPosts] = React.useState<Post[]>(initialPosts);
   const [page, setPage] = React.useState(0);
   const [isLastPage, setIsLastPage] = React.useState(false);

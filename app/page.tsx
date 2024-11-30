@@ -1,6 +1,6 @@
 import StateInfo from "@/components/StateInfo";
 import { getPostsBy } from "./actions";
-import PostList from "@/components/post/PostList";
+import PostCardList from "@/components/post/cards/PostCardList";
 import Container from "@/components/Container";
 
 export default async function Home({
@@ -8,6 +8,7 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const q = (await searchParams).q;
   const searchQuery = decodeURIComponent(String(q || "").trim());
   const initialPosts = await getPostsBy(0, searchQuery);
@@ -22,7 +23,7 @@ export default async function Home({
 
   return (
     <Container>
-      <PostList
+      <PostCardList
         className="w-full"
         key={searchQuery}
         initialPosts={initialPosts}
