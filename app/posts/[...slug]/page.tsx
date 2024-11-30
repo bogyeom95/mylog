@@ -1,7 +1,7 @@
 import { allPosts, Post } from "contentlayer/generated";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MDXReader from "@/components/mdx-reader";
+import MDXReader from "@/components/mdx/MDXReader";
 export async function generateMetadata({
   params,
 }: {
