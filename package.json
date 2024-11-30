@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "contentlayer": "^0.3.4",
     "date-fns": "^4.1.0",
     "material-icons": "^1.13.12",
