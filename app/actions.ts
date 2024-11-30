@@ -9,6 +9,9 @@ function sanitizeSearchQuery(query?: string): string {
 }
 
 export async function getPostsBy(page: number, searchQuery?: string) {
+  // 타임아웃
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const query = sanitizeSearchQuery(searchQuery);
   const sortedPosts = allPosts
     .filter((post) => {

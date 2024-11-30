@@ -1,19 +1,37 @@
 "use client";
 import { Post } from "@/.contentlayer/generated";
 import { getPostsBy } from "@/app/actions";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import PostCard from "./post-card";
-export default function PostList({
-  initialPosts,
-  searchQuery,
-}: {
+import StateInfo from "../StateInfo";
+import cn from "classnames";
+
+interface PostListProps {
+  className?: string;
   initialPosts: Post[];
   searchQuery: string;
-}) {
+}
+
+export default function PostList({
+  className,
+  initialPosts,
+
+  searchQuery,
+}: PropsWithChildren<PostListProps>) {
   const [posts, setPosts] = React.useState<Post[]>(initialPosts);
   const [page, setPage] = React.useState(0);
   const [isLastPage, setIsLastPage] = React.useState(false);
   const trigger = React.useRef<HTMLSpanElement>(null);
+
+  const loadMorePosts = async () => {
+    const newPosts = await getPostsBy(page + 1, searchQuery);
+    if (newPosts.length !== 0) {
+      setPage((prev) => prev + 1);
+      setPosts((prev) => [...prev, ...newPosts]);
+    } else {
+      setIsLastPage(true);
+    }
+  };
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,14 +42,7 @@ export default function PostList({
         const element = entries[0];
         if (element.isIntersecting && trigger.current) {
           observer.unobserve(trigger.current);
-
-          const newPosts = await getPostsBy(page + 1, searchQuery);
-          if (newPosts.length !== 0) {
-            setPage((prev) => prev + 1);
-            setPosts((prev) => [...prev, ...newPosts]);
-          } else {
-            setIsLastPage(true);
-          }
+          loadMorePosts();
         }
       },
       {
@@ -44,26 +55,21 @@ export default function PostList({
     return () => {
       observer.disconnect();
     };
-  }, [page]);
+  }, [page, searchQuery]);
 
   return (
-    <>
+    <div className={cn(className)}>
       {posts.map((post) => (
         <PostCard key={post.title} post={post} />
       ))}
 
-      {!isLastPage ? (
-        <span ref={trigger} className="w-full flex justify-center">
-          <span className="loading loading-dots loading-md "></span>
-        </span>
-      ) : (
-        <h1 className="text-2xl font-semibold flex items-center gap-1 my-20">
-          <span className="material-icons-round text-4xl">
-            sentiment_very_dissatisfied
-          </span>
-          <span>No More Post...</span>
-        </h1>
-      )}
-    </>
+      <div className="w-full flex justify-center my-20">
+        {!isLastPage && (
+          <span ref={trigger} className="loading loading-dots loading-md " />
+        )}
+
+        <StateInfo show={isLastPage} text={"No More Post..."} />
+      </div>
+    </div>
   );
 }

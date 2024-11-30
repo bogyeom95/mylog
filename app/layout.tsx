@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 import React from "react";
-import SidebarMenu from "@/components/sidebar-menu";
-import Footer from "@/components/footer";
+import SidebarMenu from "@/components/layout/sidebar-menu";
+import Footer from "@/components/layout/footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -47,9 +47,6 @@ export default function RootLayout({
       <body className={`${roboto.variable} `}>
         <Header />
         <div className="flex justify-center">
-          {/* 사이드바 - lg 이상일 때만 보이도록 설정 */}
-
-          {/* 메인 콘텐츠 영역 */}
           <main className="min-h-[calc(100svh-8rem)]">{children}</main>
 
           <aside className="hidden xl:flex  xl:w-1/5 sticky top-20  h-[calc(100vh-8rem)]  overflow-y-auto overflow-x-hidden z-10">
