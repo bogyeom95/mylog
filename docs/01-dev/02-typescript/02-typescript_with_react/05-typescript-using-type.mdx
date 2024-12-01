@@ -1,0 +1,130 @@
+---
+title: 5. Using Type
+description: 타입스크립트 타입 활용하는 방법
+date: 2024-12-01
+image: /docs/01-dev/01-typescript/typescript.svg
+tags: ["TypeScript", "Basic", "Core"]
+---
+
+# Using Type
+
+## 조건부 타입
+
+- `extends`, `infer`, `never` 등을 활용해 원하는 타입을 만들 수 있음
+
+### extends와 제네릭을 활용한 조건부 타입
+
+- `extends` 키워드는 타입을 활장할 때와 타입을 조건부로 설정할 때 사용
+- 제네릭 타입에서는 한정자 역할로도 사용
+
+```tsx title="extends" showLineNumbers
+T extends U ? X : Y
+
+type PayMethod<T> = T extends 'card' ? Card : Bank;
+type CardPayMethod = PayMethod<'card'>; // Card
+type BankPayMethod = PayMethod<'bank'>; // Bank
+// 일반적으로 extends 키워드를 문자열 리터럴과 함께 사용하지는 않음
+```
+
+- `T`가 `U`에 할당 가능하면 `X` 타입을, 그렇지 않으면 `Y` 타입을 반환
+- 제네릭과 `extends`를 함께 사용하면 제네릭으로 받는 타입 제한 가능
+  - 잘못된 값을 넘길 수 없기 때문에 휴먼 에러 방지 가능
+- `extend`를 활용해 조건부 타입을 설정하면 조건부 타입을 사용해 반환 값을 사용자가 원하는 값으로 구체화 가능
+  - 불필요한 타입 가드, 타입 단언 등을 방지 가능
+
+### infer를 활용한 타입 추론
+
+- `extends`를 사용할 때 `infer` 키워드를 사용하면 타입을 추론할 수 있음
+- `infer`는 타입을 추론하는 역할
+- 삼항 연잔자를 사용한 조건문의 형태를 가지며 `extends`로 조건을 서술하고 `infer`로 타입을 추론
+
+```tsx title="infer" showLineNumbers
+type UnpackPromise<T> = T extends Promise<infer K>[] ? K : any;
+
+const promises = [Promise.resolve('Hello'), Promise.resolve(123)];
+type Expected = UnpackPromise<typeof promises>; // string | number
+```
+
+- `UnpackPromise`는 `T`를 받아 `T`가 `Promise`로 매핑된 경우라면 `K`를 반환하고, 그렇지 않으면 `any`를 반환
+- `Promise<infer K>`는 `Promise`의 반환 값을 추론해 해당 값의 타입을 `K`로 한다는 의미
+
+## 템플릿 리터럴 타입 활용
+
+- 타입스크립트에서는 유니온 타입을 사용하여 변수 타입을 특정 문자열로 지정 가능
+- 이 기능을 사용하면 컴파일타임의 변수에 할당되는 타입을 특정 문자열로 정확하게 검사 가능
+  - 휴먼 에러 방지 및 자동 완성 기능 등에 유용
+- 타입스크립트 4.1 버전부터는 템플릿 리터럴 타입(Template Literal Types)을 지원
+- 템플릿 리터럴 타입은 자바스크립트 템플릿 리터럴 분법을 사용해 특정 문자열에 대한 타입을 선언 할 수 있는 기능
+
+```tsx title="Template Literal Types" showLineNumbers
+type HeaderTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+type HeaderNumber = 1 | 2 | 3 | 4 | 5 | 6;
+type HeaderTagByNumber = `h${HeaderNumber}`;
+```
+
+### 템플릿 리터럴 주의사항
+
+- 타입스크립트 컴파일러가 유니온을 추론하는 데 시간이 오래 걸리면 비효율적이기 때문에
+  타입스크립트가 타입을 추론하지 않고 에러를 내뱉을 때가 있음
+- 템플릿 리터럴 타입에 삽입된 유니온 조합의 경우의 수가 너무 많아지지 않게 적적하게 나누어 타입을 정의하는 것이 좋음
+
+```tsx title="에러 가능 코드" showLineNumbers
+type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type Chunk = `${Digit}${Digit}${Digit}${Digit}`;
+type PhoneNumberType = `010-${Chunk}-${Chunk}`;
+```
+
+## Partial, Pick, Omit
+
+### Partial
+
+- 특정 타입의 부분 집합을 만들어주는 유틸리티 타입
+
+```tsx title="Partial" showLineNumbers
+interface Human {
+  name: string;
+  age: number;
+}
+
+type PartialHuman = Partial<Human>;
+const me: PartialHuman = { name: 'Jack' };
+const you: PartialHuman = { age: 20 };
+```
+
+- `Partial`은 `Human` 타입의 모든 속성을 선택적으로 만들어줌
+
+### Pick
+
+- 특정 타입에서 원하는 속성만 선택하여 새로운 타입을 만들어주는 유틸리티 타입
+
+```tsx title="Pick"
+interface Human {
+  name: string;
+  age: number
+}
+type HumanName = Pick<Human, 'name'>;
+const me: HumanName = { name: 'Jack' };
+const you: HumanName = { name: 'Jane' };
+```
+
+### Omit
+
+- 특정 타입에서 원하는 속성을 제외한 새로운 타입을 만들어주는 유틸리티 타입
+
+```tsx title="Omit"
+interface Human {
+  name: string;
+  age: number
+}
+type HumanWithoutName = Omit<Human, 'name'>;
+const me: HumanWithoutName = { age: 20 };
+const you: HumanWithoutName = { age: 30 };
+```
+
+---
+
+## Reference
+
+- [우아한 타입스크립트 with 리액트(교보문고)](https://product.kyobobook.co.kr/detail/S000210716282)
+- [우아한 타입스크립트 with 리액트(yes24)](https://www.yes24.com/Product/Goods/123049083)
