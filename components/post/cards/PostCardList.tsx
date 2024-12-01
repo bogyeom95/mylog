@@ -1,7 +1,7 @@
 "use client";
 import { Post } from "@/.contentlayer/generated";
 import { getPostsBy } from "@/app/actions";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import PostCard from "./card/PostCard";
 import StateInfo from "../../StateInfo";
 import cn from "classnames";
@@ -17,7 +17,7 @@ export default function PostCardList({
   initialPosts,
 
   searchQuery,
-}: PropsWithChildren<PostCardListProps>) {
+}: PostCardListProps) {
   const [posts, setPosts] = React.useState<Post[]>(initialPosts);
   const [page, setPage] = React.useState(0);
   const [isLastPage, setIsLastPage] = React.useState(false);

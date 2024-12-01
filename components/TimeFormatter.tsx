@@ -1,5 +1,4 @@
 import { parseISO, format } from "date-fns";
-import { PropsWithChildren } from "react";
 import cn from "classnames";
 import { ko } from "date-fns/locale";
 
@@ -13,7 +12,7 @@ export default function TimeFormatter({
   className,
   date,
   dateFormat = " PPP ",
-}: PropsWithChildren<TimeFormatterProps>) {
+}: TimeFormatterProps) {
   return (
     <time
       dateTime={date}

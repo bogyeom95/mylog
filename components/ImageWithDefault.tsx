@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import cn from "classnames";
 import Image from "next/image";
 interface ImageWithDefaultProps {
@@ -11,7 +10,7 @@ export const ImageWithDefault = ({
   className,
   alt,
   imageUrl,
-}: PropsWithChildren<ImageWithDefaultProps>) => {
+}: ImageWithDefaultProps) => {
   return (
     <div
       className={cn(

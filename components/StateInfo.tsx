@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import cn from "classnames";
 interface StateInfoProps {
   className?: string;
@@ -12,7 +11,7 @@ export default function StateInfo({
   show = true,
   iconName = "sentiment_very_dissatisfied",
   text,
-}: PropsWithChildren<StateInfoProps>) {
+}: StateInfoProps) {
   return (
     <h1
       className={cn(

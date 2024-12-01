@@ -1,14 +1,10 @@
-import { PropsWithChildren } from "react";
 import cn from "classnames";
 interface TagPlatterProps {
   className?: string;
   tags?: string[];
 }
 
-export const TagPlatter = ({
-  className,
-  tags,
-}: PropsWithChildren<TagPlatterProps>) => {
+export const TagPlatter = ({ className, tags }: TagPlatterProps) => {
   return (
     <div className={cn("flex flex-wrap gap-2", className)}>
       {tags?.map(tag => (

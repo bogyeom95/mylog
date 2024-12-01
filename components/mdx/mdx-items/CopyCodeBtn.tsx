@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithChildren, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import cn from "classnames";
 
 export default function CopyCodeBtn({ text }: { text: string }) {
@@ -39,11 +39,7 @@ interface AnimaIconProps {
   iconName: string;
 }
 
-const AnimaIcon = ({
-  className,
-  show = true,
-  iconName,
-}: PropsWithChildren<AnimaIconProps>) => {
+const AnimaIcon = ({ className, show = true, iconName }: AnimaIconProps) => {
   return (
     <span
       className={cn(

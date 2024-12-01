@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { PropsWithChildren } from "react";
 
 const searchMoalId = "header_search_modal";
 
@@ -58,10 +57,7 @@ interface SearchAreaProps {
   handleSubmit: (formData: FormData) => void;
 }
 
-const SearchArea = ({
-  id,
-  handleSubmit,
-}: PropsWithChildren<SearchAreaProps>) => {
+const SearchArea = ({ id, handleSubmit }: SearchAreaProps) => {
   return (
     <div>
       <form
@@ -95,7 +91,7 @@ interface ModalProps {
   handleSubmit: (formData: FormData) => void;
 }
 
-const Modal = ({ id, handleSubmit }: PropsWithChildren<ModalProps>) => {
+const Modal = ({ id, handleSubmit }: ModalProps) => {
   return (
     <dialog id={id} className="modal modal-bottom">
       <div className="modal-box shadow-lg">

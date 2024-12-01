@@ -1,5 +1,4 @@
 import { ImageWithDefault } from "@/components/ImageWithDefault";
-import { PropsWithChildren } from "react";
 
 interface PostCardHeaderProps {
   imageUrl?: string;
@@ -11,7 +10,7 @@ export const PostCardHeader = ({
   imageUrl,
   title,
   description,
-}: PropsWithChildren<PostCardHeaderProps>) => {
+}: PostCardHeaderProps) => {
   return (
     <div className="flex flex-row gap-4">
       <ImageWithDefault alt={title} imageUrl={imageUrl} />
@@ -28,7 +27,7 @@ interface TitleAndDescriptionProps {
 const TitleAndDescription = ({
   title,
   description,
-}: PropsWithChildren<TitleAndDescriptionProps>) => {
+}: TitleAndDescriptionProps) => {
   return (
     <div className={`flex flex-col gap-2 overflow-hidden`}>
       <h1 className="truncate text-2xl font-extrabold">{title}</h1>
